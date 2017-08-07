@@ -9,8 +9,12 @@
 이 문서의 테스트 환경은 다음과 같다.
 
 
-    OS              : WINDOWS 7
-    DATABASE Server : GOLDILOCKS 3.1.0 r22733
+    OS Server               : LINUX 3.10.0-327.el7.x86_64
+    DATABASE Server Version : GOLDILOCKS 3.1.0 r22733
+    DATABASE Server IP      : 192.168.0.50
+    DATABASE Server Listener Port : 22581
+
+    OS Client       : WINDOWS 7
     DATABASE Client : GOLDILOCKS 3.1.0 r22733 win32
 
 
