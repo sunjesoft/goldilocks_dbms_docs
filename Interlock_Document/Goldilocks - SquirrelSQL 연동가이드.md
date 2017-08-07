@@ -34,7 +34,8 @@
 3 - 1. 다운로드 받은 zip 파일을 압축해제한다.<br/>
 3 - 2. 인코딩을 UTF-8 로 하려는 경우 압축해제된 경로내의 Squirrel-sql.bat 파일의 내용을 수정한다.<br/>
 * 내용 가장 하단 start 부분의 줄에 다음의 내용을 추가한다. <br/>
- * -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8
+=> -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8
+<br/>
 
 
     start ... "%LOCAL_JAVA%" -Xmx256m -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dsun.awt.nopixfmt=true ...
@@ -50,13 +51,13 @@
 4 - 4. Name 에 원하는 명(문서에서는 GOLDILOCKS)을 입력한다.<br/>
 4 - 5. Example URL 에 GOLDILOCKS JDBC URL 을 입력한다.<br/>
 * GOLDILCOKS JDBC URL 은 다음과 같이 구성된다. DSN 은 아무 문자열이나 입력하면 되나 null문자는 허용하지 않는다.<br/>
- * jdbc:goldilocks://Server IP:Listener Port/DSN<br/>
- * 예) SERVER IP 가 192.168.0.50 이고 Listener Port 가 22581 인 경우 URL 구성<br/>
+ => jdbc:goldilocks://Server IP:Listener Port/DSN<br/>
+ => 예) SERVER IP 가 192.168.0.50 이고 Listener Port 가 22581 인 경우 URL 구성<br/>
    jdbc:goldilocks://192.168.0.50:22581/goldilocks
 
 4 - 6. Class Name 에 GOLDILCOSK JDBC DRIVER NAME 을 입력한다.<br/>
-* GOLDILOCKS JDBC DRIVER NAME 은 다음과 같이 구성된다.
- * sunje.goldilocks.jdbc.GoldilocksDriver
+* GOLDILOCKS JDBC DRIVER NAME 은 다음과 같이 구성된다.<br/>
+ => sunje.goldilocks.jdbc.GoldilocksDriver
 
 4 - 7. OK 버튼을 클릭하여 Driver 를 등록한다.
 
