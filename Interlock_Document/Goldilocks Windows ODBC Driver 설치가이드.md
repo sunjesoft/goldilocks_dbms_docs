@@ -77,8 +77,8 @@
 #### 5. Goldilocks Windows ODBC Driver 등록
 
 5 - 1. ODBC Driver 등록을 위해 다음의 경로에 들어간다. (32 bit OS 에서는 경로가 달라질 수 있다.)<br/>
-=> 설치를 64 bit로 한 경우 : C:\Windows\SysWOW64<br/>
-=> 설치를 32 bit로 한 경우 : C:\Windows\System32<br/>
+=> 설치를 64 bit로 한 경우 : C:\Windows\System32<br/>
+=> 설치를 32 bit로 한 경우 : C:\Windows\SysWOW64<br/>
 5 - 2. odbcad32.exe 프로그램을 실행한다.<br/>
 5 - 3. 사용자 DSN 탭에서 추가버튼을 선택한다.<br/>
 5 - 4. GOLDILOCKS 드라이버를 선택한 후 마침을 클릭한다..<br/>
