@@ -72,6 +72,6 @@
 5 - 7. Password에 Database 사용자 비밀번호를 입력한다.<br/>
 5 - 8. Test 버튼을 클릭한 뒤, Connect 버튼을 눌러 연동이 되는지 확인한다.<br/>
 * 접속이 성공한 경우 Connection successful 팝업창이 뜬다.<br/>
-* 접속이 실패한 경우 URL정보, 방화벽 등을 확인한다.<br/>
+* 접속이 실패한 경우 URL정보, LISTENER 상태, 방화벽 등을 확인한다.<br/>
 
 5 - 9. OK 버튼을 눌러 Database 에 접속한다.
