@@ -50,12 +50,12 @@
 4 - 3. Extra Class Path 에서 Add 버튼을 선택한 뒤, goldilocks6.jar 파일을 등록한다.<br/>
 4 - 4. Name 에 원하는 명(문서에서는 GOLDILOCKS)을 입력한다.<br/>
 4 - 5. Example URL 에 GOLDILOCKS JDBC URL 을 입력한다.<br/>
-* GOLDILOCKS JDBC URL 은 다음과 같이 구성된다. DSN 은 아무 문자열이나 입력하면 되나 null문자는 허용하지 않는다.<br/>
- => jdbc:goldilocks://Server IP:Listener Port/DSN<br/>
+* GOLDILOCKS JDBC URL 은 다음과 같이 구성된다. DBName 은 아무 문자열이나 입력하면 되나 null문자는 허용하지 않는다.<br/>
+ => jdbc:goldilocks://Server IP:Listener Port/DBName<br/>
  => 예) SERVER IP 가 192.168.0.50 이고 Listener Port 가 22581 인 경우 URL 구성<br/>
    jdbc:goldilocks://192.168.0.50:22581/goldilocks
 
-4 - 6. Class Name 에 GOLDILCOSK JDBC DRIVER NAME 을 입력한다.<br/>
+4 - 6. Class Name 에 GOLDILOCKS JDBC DRIVER NAME 을 입력한다.<br/>
 * GOLDILOCKS JDBC DRIVER NAME 은 다음과 같이 구성된다.<br/>
  => sunje.goldilocks.jdbc.GoldilocksDriver
 
