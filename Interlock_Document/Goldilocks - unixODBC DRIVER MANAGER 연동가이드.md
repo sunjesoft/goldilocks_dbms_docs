@@ -3,7 +3,7 @@
 #### 1. 개요
 
 1 - 1. GOLDILOCKS ODBC DRIVER 를 이용하여 unixODBC DRIVER MANAGER 와 연동하는 방법을 설명한다.<br/>
-1 - 2. 이 문서는 http:www.unixodbc.org/ 에서 제공하는 unixODBC DRIVER MANAGER 를 기준으로 설명한다.<br/>
+1 - 2. 이 문서는 http://www.unixodbc.org/ 에서 제공하는 unixODBC DRIVER MANAGER 를 기준으로 설명한다.<br/>
 1 - 3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
 
 
@@ -16,7 +16,7 @@
 
 #### 2. unixODBC DRIVER MANAGER 다운로드
 
-2 - 1.  http://www.unix.odbc.org 사이트에 접속한다.<br/>
+2 - 1. http://www.unix.odbc.org 사이트에 접속한다.<br/>
 2 - 2. 화면 좌측의 Download 를 클릭한다.<br/>
 2 - 3. Download 버튼 클릭을 통해 소스를 다운받는다.<br/>
 
