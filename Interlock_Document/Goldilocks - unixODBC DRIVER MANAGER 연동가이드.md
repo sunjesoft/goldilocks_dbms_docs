@@ -2,12 +2,14 @@
 
 #### 1. 개요
 
-1 - 1. GOLDILOCKS ODBC DRIVER 를 이용하여 unixODBC DRIVER MANAGER 와 연동하는 방법을 설명한다.<br/>
-1 - 2. 이 문서는 http://www.unixodbc.org/ 에서 제공하는 unixODBC DRIVER MANAGER 를 기준으로 설명한다.<br/>
-1 - 3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
+###### 1 - 1. GOLDILOCKS ODBC DRIVER 를 이용하여 unixODBC DRIVER MANAGER 와 연동하는 방법을 설명한다.
+
+###### 1 - 2. 이 문서는 http://www.unixodbc.org/ 에서 제공하는 unixODBC DRIVER MANAGER 를 기준으로 설명한다.
+
+###### 1 - 3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
 
 
-이 문서의 테스트 환경은 다음과 같다.
+[ 테스트 환경 ]
 
     OS       : LINUX 3.10.0-327.el7.x86_64
     DATABASE : GOLDILOCKS 3.1.0 r22655
@@ -16,56 +18,65 @@
 
 #### 2. unixODBC DRIVER MANAGER 다운로드
 
-2 - 1. http://www.unix.odbc.org 사이트에 접속한다.<br/>
-2 - 2. 화면 좌측의 Download 를 클릭한다.<br/>
-2 - 3. Download 버튼 클릭을 통해 소스를 다운받는다.<br/>
+###### 2 - 1. http://www.unix.odbc.org 사이트에 접속한다.
+
+###### 2 - 2. 화면 좌측의 Download 를 클릭한다.
+
+###### 2 - 3. Download 버튼 클릭을 통해 소스를 다운받는다.
 
 
-사이트의 UI 는 언제든지 변경 될 수 있다.<br/>
-다운로드 받은 제품은 다음과 같은 형태의 압축파일이다.<br/>
+* 사이트의 UI 는 언제든지 변경 될 수 있다.
+* 다운로드 받은 제품은 다음과 같은 형태의 압축파일이다.
 
+[ 파일 형식 ]
     Shell> ls
     unixODBC-2.3.4.tar.gz
 
 
 #### 3. unixODBC DRIVER MANAGER 설치
 
-3 - 1. 소스를 압축 해제한다. 이 문서에서는 /home/user/unixODBC 경로에 설치한다.
+###### 3 - 1. 소스를 압축 해제한다. 이 문서에서는 /home/user/unixODBC 경로에 설치한다.
 
+[ 압축 해제 ]
 
     Shell> cd /home/user/unixODBC
     Shell> tar xvzf unixODBC-2.3.4.tar.gz
 
-3 - 2. 컴파일용 환경변수 설정한다.
-3 - 2 - 1. 사용할 ODBC DRIVER 의 bit와 맞는 Goldilocks Library 를 확인한다.
+###### 3 - 2. 컴파일용 환경변수 설정한다.
 
- * 32bit 컴파일은 libgoldilockscs.so 를 64bit 컴파일은 libgoldilockscs-ul32/64.so 를 사용한다.
- * ul32/ul64 는 ODBC DRIVER 의 bit 를 의미하지 않으며 SQLLEN 의 값을 의미한다.
- * ul32 는 SQLLEN=4byte(32bit), ul64 는 SQLLEN=8byte(64bit) 를 의미한다.
+###### 3 - 2 - 1. 사용할 ODBC DRIVER 의 bit와 맞는 Goldilocks Library 를 확인한다.
 
+* 32bit 컴파일은 libgoldilockscs.so 를 64bit 컴파일은 libgoldilockscs-ul32/64.so 를 사용한다.
+* ul32/ul64 는 ODBC DRIVER 의 bit 를 의미하지 않으며 SQLLEN 의 값을 의미한다.
+* ul32 는 SQLLEN=4byte(32bit), ul64 는 SQLLEN=8byte(64bit) 를 의미한다.
+
+
+[ 라이브러리 목록 ]
 
      libgoldilockscs-ul32.so
      libgoldilockscs-ul64.so
      libgoldilockscs.so
 
 
-3 - 2 - 2. SQLLEN 및 SQLULEN 크기 설정
+###### 3 - 2 - 2. SQLLEN 및 SQLULEN 크기 설정
 
- * SQLLEN 및 SQLULEN 크기는 기본적으로 OS 의 bit 에 맞게 설정된다.
- * SIZEOF_LONG_INT 크기에 따라 32/64bit 가 결정된다.
+* SQLLEN 및 SQLULEN 크기는 기본적으로 OS 의 bit 에 맞게 설정된다.
+* SIZEOF_LONG_INT 크기에 따라 32/64bit 가 결정된다.
+* OS 64 bit 에서 SQLLEN / SQLULEN 을 32bit 로 사용하기 위해서는, 컴파일 환경변수를 다음과 같이 설정한다.
 
-OS 64 bit 에서 SQLLEN / SQLULEN 을 32bit 로 사용하기 위해서는, 컴파일 환경변수를 다음과 같이 설정한다.
-
+[ 환경변수 설정 ]
 
     export CFLAGS=-DBUILD_LEGACY_64_BIT_MODE=1
 
-3 - 3 - 3. unixODBC 컴파일 bit 선택
+###### 3 - 3 - 3. unixODBC 컴파일 bit 선택
 
- * 컴파일 환경변수를 통해서 bit 를 선택할 수 있다.
- * 기본적으로 컴파일은 OS bit 를 따라간다.
- * OS 64bit 에서 32bit 로 컴파일 하려 하는 경우 아래와 같이 설정한다.
+* 컴파일 환경변수를 통해서 bit 를 선택할 수 있다.
+* 기본적으로 컴파일은 OS bit 를 따라간다.
+* OS 64bit 에서 32bit 로 컴파일 하려 하는 경우 아래와 같이 설정한다.
 
-Linux 64bit 에서 unixODBC를 32bit 컴파일 설정을 하기 위한 환경변수 예는 다음과 같다.
+* Linux 64bit 에서 unixODBC를 32bit 컴파일 설정을 하기 위한 환경변수 예는 다음과 같다.
+
+[ 환경변수 설정 ]
 
     export CFLAGS="-m32 -DBUILD_LEGACY_64_BIT_MODE=1"
     export LDFLAGS=-m32
@@ -74,11 +85,13 @@ Linux 64bit 에서 unixODBC를 32bit 컴파일 설정을 하기 위한 환경변
 
 #### 4. make 를 위한 configuration 과정
 
-4 - 1. configuration 시 설치할 디렉토리 (/home/user/unixODBC) 를 설정한다.
+###### 4 - 1. configuration 시 설치할 디렉토리 (/home/user/unixODBC) 를 설정한다.
 
 * configuration 에서 제공하는 옵션들은, 필요에 따라 부여하며 이 문서에서는 작성하지 않는다.
 * configuration 단계에서 컴파일을 수행하기 위한 환경을 체크하는데, 이 때 환경에 맞는 바이너리가 없어 에러가 발생하는 경우 직접 설치해야 한다.
 
+
+[ 컴파일 ]
 
     Shell> ./configure --prefix=/home/user/unixODBC
      * --prefix         : 설치할 경로를 설정 (절대경로 작성)
@@ -86,21 +99,24 @@ Linux 64bit 에서 unixODBC를 32bit 컴파일 설정을 하기 위한 환경변
        사전에 해당 디렉토리에 대한 접근 및 쓰기 권한이 있어야한다.
 
 
-4 - 2. make 수행
+###### 4 - 2. make 수행
 
 * configure 가 끝나면 make 를 수행한다.
 * make install 이 끝나면 --prefix 에 설정한 경로에 설치된다.
 
+[ 설치 ]
 
     Shell> make
     Shell> make install
 
 
 
-4 - 3. 설치 확인
+###### 4 - 3. 설치 확인
 
 * install 후 정상적으로 library 를 로딩하는지 확인한다.
 
+
+[ 라이브러리 로딩 검사 ]
 
     Shell> cd /home/user/unixODBC/bin
     Shell> ./dltest $GOLDILOCKS_HOME/lib/libgoldilockscs-ul32.so
