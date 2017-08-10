@@ -29,6 +29,7 @@
 * 다운로드 받은 제품은 다음과 같은 형태의 압축파일이다.
 
 [ 파일 형식 ]
+
     Shell> ls
     unixODBC-2.3.4.tar.gz
 
@@ -127,7 +128,9 @@
 
 #### 5. unixODBC DRIVER MANAGER 연동
 
-5 - 1. ini 환경파일경로 및 SQLLEN 값을 확인한다.
+###### 5 - 1. ini 환경파일경로 및 SQLLEN 값을 확인한다.
+
+[ odbcinst 환경 ]
 
     Shell> odbcinst -j
     unixODBC 2.3.4
@@ -143,6 +146,7 @@
 
 * .odbc.ini 설정파일 예제
 
+[ odbc.ini 환경파일 설정 ]
 
     [ODBC Data Sources]
     GoldilocksODBC = Goldilocks ODBC Driver
@@ -156,6 +160,8 @@
 
 * 주요 설정 값
 
+[ 프로퍼티 ]
+
 |설정항목 |설정값                |설명                                       |
 |:--     |:--                   |:--                                       |
 |Driver  |libgoldilocks-ul32.so |컴파일 bit / SQLLEN bit 에 따라 Driver 를 설정한다.   |
@@ -167,8 +173,9 @@
 
 #### 6. unixODBC 연결 테스트
 
-6 - 1. 설정이 완료된 후, unixODBC 가 설치된 경로에서 isql 툴을 이용하여 접속한다.
+###### 6 - 1. 설정이 완료된 후, unixODBC 가 설치된 경로에서 isql 툴을 이용하여 접속한다.
 
+[ unixODBC 를 이용하여 Goldilocks 접속 ]
 
     Shell> cd /home/user/unixODBC/bin
     Shell> ./isql -v GoldilocksODBC SYS gliese
@@ -186,13 +193,13 @@
 
 #### 7. unixODBC Trace Log 설정
 
-7 - 1. DRIVERS odbcinst.ini 에 다음과 같이 기록한 후 저장한다.
+###### 7 - 1. DRIVERS odbcinst.ini 에 다음과 같이 기록한 후 저장한다.
 
 * DSN 명은 반드시 [ODBC] 로 사용해야 한다.
 * Trace log 를 남길 위치와, log 기록 수행여부를 기록한다.
+* odbcinst.ini 설정파일은 아래와 같다.
 
-* odbcinst.ini 설정파일 예제
-
+[ odbcinst 환경파일 설정 ]
 
     [ODBC]
     TraceFile = /home/user/unixODBC/trace.log
