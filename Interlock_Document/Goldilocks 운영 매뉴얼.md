@@ -127,7 +127,7 @@
 
 [ gsql 사용법 ]
 
-    $ gsql --help
+    Shell> gsql --help
 
 
     Usage
@@ -447,7 +447,7 @@
 
 [ gloader 옵션 ]
 
-    $ gloader --help
+    Shell> gloader --help
 
      Copyright © 2010 SUNJESOFT Inc. All rights reserved.
      Release Trunk.3.1.0 revision(22655)
