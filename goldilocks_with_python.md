@@ -43,7 +43,7 @@ $ python3.6 --version
 Python 3.6.1
 ```
 
-* pip 를 이용한 pyodbc 설치 (python3 일 경우 pip3)
+* 다음은 root 계정으로 python 을 설치한 후, pip 를 이용한 pyodbc 설치 (python3 일 경우 pip3)
 ```
 [root@localhost ~]# pip3 install pyodbc
 Collecting pyodbc
@@ -54,9 +54,11 @@ Successfully installed pyodbc-4.0.16
 [root@localhost ~]#
 ```
 
+> 주의할 점은 python 설치계정과 pip 실행계정이 같아야 정상적인 설치가 가능하다.
+
 #### unixODBC
 
-unixODBC 는 <www.unixODBC.org> 에서 소스를 받거나 yum 및 apt 같은 패키지 관리자를 사용하여 설치한다.
+다음은 root 계정을 이용하여 <www.unixODBC.org> 에서 소스를 받거나 yum 및 apt 같은 패키지 관리자를 사용하여 설치한다.
 ```
 [root@localhost ~]# odbcinst -j
 unixODBC 2.3.4
@@ -85,7 +87,11 @@ host   = "HOST=127.0.0.1"
 port   = "PORT=22581"
 uid    = "UID=test"
 pwd    = "PWD=test"
-driver = "DRIVER=/home/chlee/workspace/sundb/product/Gliese/home/lib/libgoldilockscs-ul64.so"
+
+# path 등은 goldilocks 설치 경로에 따라 다르다.
+# absolute path => "/home/sunje/goldilocks_home/lib/"
+# library name  => "libgoldilockscs-ul64.so"
+driver = "DRIVER=/home/sunje/goldilocks_home/lib/libgoldilockscs-ul64.so"
 opt1   = "ENABLE_SQLBINDPARAMETER_CONSISTENCY_CHECK=1"
 
 
