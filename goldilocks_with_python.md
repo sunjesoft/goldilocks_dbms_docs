@@ -54,7 +54,7 @@ Successfully installed pyodbc-4.0.16
 [root@localhost ~]#
 ```
 
-> 주의할 점은 python 설치계정과 pip 실행계정이 같아서 정상적인 설치가 가능하다.
+> 주의할 점은 python 설치계정과 pip 실행계정이 같아야 정상적인 설치가 가능하다.
 
 #### unixODBC
 
@@ -88,9 +88,10 @@ port   = "PORT=22581"
 uid    = "UID=test"
 pwd    = "PWD=test"
 
-# absolute path => "/home/chlee/workspace/sundb/product/Gliese/home/lib/"
+# path 등은 goldilocks 설치 경로에 따라 다르다.
+# absolute path => "/home/sunje/goldilocks_home/lib/"
 # library name  => "libgoldilockscs-ul64.so"
-driver = "DRIVER=/home/chlee/workspace/sundb/product/Gliese/home/lib/libgoldilockscs-ul64.so"
+driver = "DRIVER=/home/sunje/goldilocks_home/lib/libgoldilockscs-ul64.so"
 opt1   = "ENABLE_SQLBINDPARAMETER_CONSISTENCY_CHECK=1"
 
 
