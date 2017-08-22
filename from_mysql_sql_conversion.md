@@ -18,11 +18,11 @@ Goldilocks >  SELECT 1 FROM DUAL
 MySQL 에서 제공하는 함수와 Goldilocks 에서 제공하는 함수간에 이름만 다른 경우를 정리하면 다음과 같다. 
 
 
-| MYSQL                 |  GOLDILOCKS              |   비고                                    | 
-|-----------------------|--------------------------|------------------------------------------|
-| IFNULL ( X,Y )        |  NVL (X,Y )              |  X가 NULL 이면 Y를 리턴한다.               | 
-| CONCAT ( X,Y ...  )   |  &#124;&#124; Operator   |  인자로 주어진 모든 것을 붙인 문자열 리턴. 오라클과 동일하다. (  *SELECT 'A' &#124;&#124;    'B' FROM DUAL*  ) | 
-| NOW (X)               | SYSDATE                  |  X 만큼 정밀도를 가진 현재 시간값을 리턴. SYSDATE 의 정밀도가 더 크므로 호환성 문제 없음.       |
+| MYSQL                   |  GOLDILOCKS               |   비고                                    | 
+|-------------------------|---------------------------|------------------------------------------|
+| IFNULL ( X,Y )          |  NVL (X,Y )               | X가 NULL 이면 Y를 리턴한다.                  | 
+| DATE_ADD( date, expr )  |  DATE_ADD( date, 'expr' ) | expr 에 single quota 를 추가 한다. DATA_ADD( date, interval -1 day ) => DATA_ADD( date, interval '-1' day ) | 
+| NOW (X)                 |  CURRENT_TIMESTAMP        | X 만큼 정밀도를 가진 현재 시간값을 리턴. CURRENT_TIMESTAMP 의 정밀도가 더 크므로 호환성 문제 없음.       |
  
 
 ## 날짜 
