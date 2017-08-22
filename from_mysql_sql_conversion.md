@@ -53,8 +53,9 @@ Goldilocks > SELECT TO_CHAR (SYSDATE, 'YYYY-MM-DD' ) FROM DUAL;
 SELECT FOR UPDATE 는 JOIN 문에서 사용될 수 없다. 만약 존재한다면 다음과 같이 변경한다. 
 
 ```
-MySQL > SELECT A.*, IFNULL ( SUM(B.VAL), 0) VALUE FROM A LEFT OUTER JOIN B ON A.ID = B.ID ;
-Goldilocks > SELECT A.* , (SELECT NVL(B.VAL) FROM B WHERE A.ID = B.ID ) FROM A ;
+MySQL > SELECT A.*, IFNULL ( SUM(B.VAL), 0) VALUE FROM A LEFT OUTER JOIN B ON A.ID = B.ID FOR UPDATE ;
+
+Goldilocks > SELECT A.* , (SELECT NVL(B.VAL) FROM B WHERE A.ID = B.ID ) FROM A FOR UPDATE ;
 ```
 
 위 SQL 은 MySQL 와 Goldilocks 간의 100% 동치는 아니나 업무 특성을 판단하여 위와 같이 변경할 수 있으면 변경하고 그렇지 않다면 한번 더 쿼리를 던져 LOCK 을 별도로 잡는다. 
