@@ -130,6 +130,54 @@ finally:
     conn.close()
 ```
 
+
+### jayDebeApi
+
+다음은 JDBC 를 이용한 예제이다. API 의 사용법은 
+connect 를 제외하고 pyodbc 와 동일하다 
+
+자세한 내용은 <https://pypi.python.org/pypi/JayDeBeApi> 를 참고한다.
+
+```python
+import jaydebeapi
+
+# path 등은 goldilocks 설치 경로에 따라 다르다.
+# absolute path => "/home/sunje/goldilocks_home/lib/"
+driver = "sunje.goldilocks.jdbc.GoldilocksDriver"
+url    = "jdbc:goldilocks://127.0.0.1:22581/test"
+jar    = "/home/sunje/goldilocks_home/lib/goldilocks6.jar"
+
+
+try:
+    conn = jaydebeapi.connect( driver,
+                               url,
+                               ["TEST", "test"],
+                               jar)
+    cursor = conn.cursor()
+    cursor.execute('DROP TABLE IF EXISTS T1')
+    print("drop table.")
+
+    cursor.execute( "CREATE TABLE T1( I1 NUMBER , I2 TIMESTAMP )" )
+    print("create table.")
+
+    row=( 1, '2017-01-01 12:34:56' )
+
+    cursor.execute( "INSERT INTO T1 VALUES( ?, ?)" , row )
+    print("insert data. (%d,%s)" % ( row[0],row[1] ) )
+
+    cursor.execute( "SELECT * FROM T1" )
+    print("select t1 data." )
+    row = cursor.fetchone()
+    if row:
+        print( "  i1 = %d i2 = %s " % (row[0],row[1])  )
+except Exception as e:
+    print( "error msg=[%s]" % str(e) )
+finally:
+    cursor.close()
+    conn.close()
+
+```
+
 > 상기 예제소스는 python3.6 을 기준으로 작성되었으며 python2 에서의 사용법은 python 메뉴얼을 참조한다.
 
 
