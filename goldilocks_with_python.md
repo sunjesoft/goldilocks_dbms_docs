@@ -131,3 +131,76 @@ finally:
 ```
 
 > 상기 예제소스는 python3.6 을 기준으로 작성되었으며 python2 에서의 사용법은 python 메뉴얼을 참조한다.
+
+
+
+### Golilocks Python 연동 가이드
+
+#### 개요
+
+
+python 을 이용하여 Goldilocks 와 연동과정을 설명한다.
+
+1. python 에서 Goldilocks JDBC에 연동하기위해 JayDebeApi 모듈을 사용한다.
+
+##### 준비사항
+
+* python
+  * python2
+  * pip
+  * JayDebeApi
+* Goldilocks Client library
+
+#### pip 설치
+
+JayDebeApi 설치를 위해서 pip 를 사전에 설치한다.
+
+```
+1. 아래 경로로 들어간 뒤, distribute 다운로드 링크를 복사 한다.
+  https://pypi.python.org/pypi/distribute/0.7.3
+
+2. 복사한 링크를 다운로드 받는다.
+  wget https://pypi.python.org/packages/5f/ad/1fde06877a8d7d5c9b60eff7de2d452f639916ae1d48f0b8f97bf97e570a/distribute-0.7.3.zip#md5=c6c59594a7b180af57af8a0cc0cf5b4a
+
+3. zip 파일을 해제한다.
+  unzip distribute-0.7.3.zip
+
+4. pip 를 설치한다.
+  sudo python setup.py install
+  sudo easy_install pip
+```
+
+> 주의할 점은 python 설치계정과 pip 실행계정이 같아야 정상적인 설치가 가능하다.
+
+#### JayDeBeApi 설치
+
+
+```
+5. JayDeBeApi 를 설치한다.
+  sudo pip install JayDeBeApi
+
+  * Python.h 헤더파일이 없다고 나오는 경우 아래를 수행한 뒤 JayDeBeApi 를 다시 설치한다.
+  sudo yum install python-devel.x86_64
+```
+
+
+#### JayDeBeApi 를 이용하여 Goldilocks 연동
+
+```
+$ cat goldi_python.ph
+import jaydebeapi
+
+conn = jaydebeapi.connect("sunje.goldilocks.jdbc.GoldilocksDriver", "jdbc:goldilocks://127.0.0.1:22581/test", ["TEST", "test"])
+
+cur = conn.cursor()
+cur.execute("DROP TABLE IF EXISTS CUSTOMER")
+cur.execute("CREATE TABLE CUSTOMER (CUST_ID INT, NAME VARCHAR(4000))")
+cur.execute("INSERT INTO CUSTOMER VALUES (1, 'John')")
+cur.execute("SELECT * FROM CUSTOMER")
+print cur.fetchall()
+cur.close()
+conn.close()
+
+$ python goldi_python.ph
+[(1.0, u'John')]
+```
