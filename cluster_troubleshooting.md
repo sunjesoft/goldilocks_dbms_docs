@@ -8,7 +8,9 @@
 * Cluster 의 신규 구성 
 * Cluster 의 특정 멤버 비정상 종료 
 * Cluster 의 특정 멤버의 데이터 유실로 인한 재구성 
+* PM 작업으로 인한 전체 Cluster 시스템 종료 및 재기동 절차 
 * Cluster 의 신규 멤버 추가 ( 노드 추가 )
+
 
 
 ## 가정 
@@ -180,8 +182,75 @@ EOF
 $ glsnr --start
 ```
 
+## PM 작업으로 인한 전체 Cluster 시스템 종료 및 재기동 절차 
+
+점검이나 기타 여러가지 상황으로 전체 Cluster 시스템을 종료 및 재기동이 필요한 경우 다음과 같은 절차를 따른다. 
+
+1. Node 2 를 shutdown 
+
+```
+$ gsql sys gliese --as sysdba <<EOF 
+shutdown abort; 
+quit;
+EOF
+```
+
+2. Node 1 을 shutdown 
+```
+$ gsql sys gliese --as sysdba <<EOF 
+shutdown abort; 
+quit;
+EOF
+```
+
+3. PM 작업 진행 
+
+4. Start 시점은 나중에 내려간 Node 부터 startup 이 되어야 한다. 즉 Node 1 부터 Startup 을 수행한다. 
+```
+$ gsql sys gliese --as sysdba <<EOF 
+startup; 
+quit;
+EOF
+```
 
 
+4. 다음 Node 2 를 startup 
+```
+$ gsql sys gliese --as sysdba <<EOF 
+startup; 
+quit;
+EOF
+```
+
+5. Node 1 에서 Global Database 를 Open 한다. 
+```
+$ gsql sys gliese --as sysdba <<EOF 
+ALTER SYSTEM OPEN GLOBAL DATABASE; 
+quit;
+EOF
+```
+
+6. Node 2 에서 Cluster Join 을 수행한다. 이떄 rebalance 가 필요하다고 오류가 나올 수 있다. 절차상 뒤에 rebalance 를 할것이기 때문에 무시한다. 
+```
+$ gsql sys gliese --as sysdba <<EOF 
+ALTER SYSTEM JOIN DATABASE; 
+quit;
+EOF
+```
+
+7. Database 를 Rebalance 한다. 
+
+```
+$ gsql sys gliese --as sysdba <<EOF 
+ALTER DATABASE REBALANCE; 
+quit;
+EOF
+```
+
+8. 모든 Member 의 Listener를 기동하여 서비스를 시작한다. 
+```
+$ glsnr --start
+```
 
 ## Goldilocks Cluster 멤버 추가 
 
