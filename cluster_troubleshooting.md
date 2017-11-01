@@ -18,14 +18,14 @@
 | 항목           |  Node 1            |  Node2               |    Node3             | 
 | -------------  |:-------------------:| :------------------: | :-----------------: |  
 | Member 명      | G1N1                | G1N2                 |  G1N3               |
-| Cluser IP      | 10.10.10.1          |  10.10.10.2          | 10.10.10.3          |
-| Cluser Port    | 10101               |   10101              | 10101               |
+|        IP      | 10.10.10.1          |  10.10.10.2          | 10.10.10.3          |
+|        Port    | 10101               |   10101              | 10101               |
 
 ## Goldilocks Cluster 신규 구성 
 
 Goldilocks Cluster 를 Node 1 과 Node 2 를 이용하여 신규 구성할때 절차는 다음과 같다. 
 
-1. Node1 장비에서 다음과 같이 Script 수행 
+1. Node1 장비에서 DB 구성
 ```
 $ gcreatedb --cluster --member=G1N1 --host=10.10.10.1 --port 10101
 $ gsql sys gliese --as sysdba <<EOF 
@@ -115,6 +115,11 @@ quit;
 EOF
 ```
 
+3. Node 1 에서 Listener 구동 후 서비스 
+```
+$ glsnr --start
+```
+
 ## Goldilocks Cluster 의 특정 맴버의 데이터 유실 
 
 Node 2에 하드웨어 Fault 가 발생하여 비정상 종료가 발생하였고, Disk 손상으로 정상적인 Startup 이 불가능한 상황이라고 가정하자. 
@@ -141,7 +146,18 @@ quit;
 EOF
 ```
 
-2. Node 2 를 Cluster Group 으로 다시 편입 
+2. Node 2 DB 를 모두 재생성 
+
+```
+$ gcreatedb --cluster --member=G1N2 --host=10.10.10.2 --port 10101
+$ gsql sys gliese --as sysdba <<EOF 
+startup; 
+ALTER SYSTEM OPEN GLOBAL DATABASE ;
+quit;
+EOF
+```
+
+3. Node 2 를 Cluster Group 으로 다시 편입 
 
 ```
 $ gsql sys gliese --as sysdba <<EOF 
@@ -150,7 +166,7 @@ quit;
 EOF
 ```
 
-3. Node 1 에서 Rebalance 를 통하여 데이터 동기화 
+4. Node 1 에서 Rebalance 를 통하여 데이터 동기화 
 
 ```
 $ gsql sys gliese --as sysdba <<EOF 
@@ -159,7 +175,7 @@ quit;
 EOF
 ```
 
-4. Node  2 에서 Listener 구동 및 서비스 
+5. Node  2 에서 Listener 구동 및 서비스 
 ```
 $ glsnr --start
 ```
@@ -191,7 +207,7 @@ quit;
 EOF
 ```
 
-3. 데이터 동기화 ( 임의의 Node 에서 수행해도 동일 )
+3. 데이터 동기화 
 
 ```
 $ gsql sys gliese --as sysdba <<EOF 
