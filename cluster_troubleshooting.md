@@ -214,14 +214,6 @@ EOF
 ```
 
 
-4. 다음 Node 2 를 startup 
-```
-$ gsql sys gliese --as sysdba <<EOF 
-startup; 
-quit;
-EOF
-```
-
 5. Node 1 에서 Global Database 를 Open 한다. 
 ```
 $ gsql sys gliese --as sysdba <<EOF 
@@ -230,7 +222,17 @@ quit;
 EOF
 ```
 
-6. Node 2 에서 Cluster Join 을 수행한다. 이떄 rebalance 가 필요하다고 오류가 나올 수 있다. 절차상 뒤에 rebalance 를 할것이기 때문에 무시한다. 
+
+6. 다음 Node 2 를 startup 
+```
+$ gsql sys gliese --as sysdba <<EOF 
+startup; 
+quit;
+EOF
+```
+
+
+7. Node 2 에서 Cluster Join 을 수행한다. 이떄 rebalance 가 필요하다고 오류가 나올 수 있다. 절차상 뒤에 rebalance 를 할것이기 때문에 무시한다. 
 ```
 $ gsql sys gliese --as sysdba <<EOF 
 ALTER SYSTEM JOIN DATABASE; 
@@ -238,7 +240,7 @@ quit;
 EOF
 ```
 
-7. Database 를 Rebalance 한다. 
+8. Database 를 Rebalance 한다. 
 
 ```
 $ gsql sys gliese --as sysdba <<EOF 
@@ -247,7 +249,7 @@ quit;
 EOF
 ```
 
-8. 모든 Member 의 Listener를 기동하여 서비스를 시작한다. 
+9. 모든 Member 의 Listener를 기동하여 서비스를 시작한다. 
 ```
 $ glsnr --start
 ```
