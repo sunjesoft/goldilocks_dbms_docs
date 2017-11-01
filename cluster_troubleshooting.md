@@ -6,8 +6,8 @@
 다루는 내용은 아래와 같다. 
 
 * Cluster 의 신규 구성 
-* Cluster 의 특정 맴버 비정상 종료 
-* Cluster 의 특정 맴버의 데이터 유실로 인한 재구성 
+* Cluster 의 특정 멤버 비정상 종료 
+* Cluster 의 특정 멤버의 데이터 유실로 인한 재구성 
 * Cluster 의 신규 멤버 추가 ( 노드 추가 )
 
 
@@ -80,7 +80,7 @@ $ glsnr --start
 여기까지 구성하였으면 Node 1 과 Node 2 로 구성된 1x2 Cluster 시스템을 구성한 것이다. 
 
 
-## Goldilocks Cluster 의 특정 맴버가 비정상종료
+## Goldilocks Cluster 의 특정 멤버가 비정상종료
 
 위에서 구성한 Cluster 시스템을 운영 중에 Node 1 장비 전체가 Reboot 되었고, 다행히 Application 에서는 Node 2로 Fail-over 하여
 Node 2 에 뜬 Goldilocks 에서는 정상적으로 업무 수행중 이라고 가정하자. 
@@ -120,7 +120,7 @@ EOF
 $ glsnr --start
 ```
 
-## Goldilocks Cluster 의 특정 맴버의 데이터 유실 
+## Goldilocks Cluster 의 특정 멤버의 데이터 유실 
 
 Node 2에 하드웨어 Fault 가 발생하여 비정상 종료가 발생하였고, Disk 손상으로 정상적인 Startup 이 불가능한 상황이라고 가정하자. 
 
@@ -185,7 +185,7 @@ $ glsnr --start
 
 ## Goldilocks Cluster 멤버 추가 
 
-Cluster 를 운영하다가 부하가 몰려서 Node 3 을 증설하기로 하였다. 이때 작업 절차는 다음과 같다. 
+Cluster 를 운영하다가  Node 3 을 증설하기로 하였다. 이때 작업 절차는 다음과 같다. 
 
 1. Node 3에서 신규 DB 생성 
 
