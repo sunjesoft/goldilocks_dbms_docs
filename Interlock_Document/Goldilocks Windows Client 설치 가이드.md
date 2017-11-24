@@ -135,7 +135,7 @@
 
 
 
-#### 6. Goldilocks Windows ODBC Driver 를 이용하여 접속테스트
+#### 6. Goldilocks 접속 응용 프로그램(gsqlnet)을 이용하여 접속테스트
 
 ###### 6 - 1. cmd 창을 실행한다.
 
