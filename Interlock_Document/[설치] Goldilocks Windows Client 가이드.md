@@ -155,10 +155,10 @@
 
 </h6>
 
-#### 6. Goldilocks 접속 응용 프로그램(gsqlnet)을 이용하여 접속테스트
+## 6. Goldilocks 접속 응용 프로그램(gsqlnet)을 이용하여 접속테스트
 
-###### 6 - 1. cmd 창을 실행한다.
+#### 6 - 1. cmd 창을 실행한다.
 
-###### 6 - 2. 입력한 DSN 명을 사용하여, gsqlnet 명령어로 데이터베이스에 접속한다.
+#### 6 - 2. 입력한 DSN 명을 사용하여, gsqlnet 명령어로 데이터베이스에 접속한다.
 
 ![windows_04](https://user-images.githubusercontent.com/9734988/33203885-f4c385f4-d144-11e7-91f3-c93647354548.jpg)
