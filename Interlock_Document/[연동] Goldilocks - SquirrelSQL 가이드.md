@@ -9,6 +9,8 @@
 
 ###### [ 테스트 환경 ]
 
+<h6>
+
     OS Server   : LINUX 3.10.0-327.el7.x86_64
     DATABASE    : GOLDILOCKS 3.1.0 r22655
     JDBC DRIVER : goldilocks6.jar
@@ -17,6 +19,7 @@
     JAVA        : 1.8.0_131
     SquirrelSQL : 3.8.0
 
+</h6>
 
 ## 2. SquirrelSQL 다운로드
 
@@ -89,7 +92,7 @@
     Driver      : Drivers탭의 Name에서 입력한 명(문서에서는 Goldilocks)을 선택한다.
     URL         : Drivers의 Example URL의 내용으로 자동으로 입력되나, 수정할 부분이 있다면 수정한다.
     UserName    : 데이터베이스 사용자 아이디를 입력한다.
-    Password    : 에 데이터베이스 사용자 비밀번호를 입력한다.
+    Password    : 데이터베이스 사용자 비밀번호를 입력한다.
 
 #### 5 - 4. Test 버튼을 클릭한 뒤, Connect 버튼을 눌러 연동이 되는지 확인한다.
 
