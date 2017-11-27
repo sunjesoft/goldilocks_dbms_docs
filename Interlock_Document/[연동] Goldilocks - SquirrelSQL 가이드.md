@@ -7,7 +7,7 @@
 #### 1 - 2. 이 문서는 http://www.squirrelsql.org/ 에서 제공하는 툴을 기준으로 설명한다.
 
 
-[ 테스트 환경 ]
+###### [ 테스트 환경 ]
 
     OS Server   : LINUX 3.10.0-327.el7.x86_64
     DATABASE    : GOLDILOCKS 3.1.0 r22655
@@ -39,7 +39,7 @@
 #### 3 - 2. 인코딩을 UTF-8 로 하려는 경우 Squirrel-sql.bat 파일의 내용을 수정한다.
 
 
-[ 수정 내용 ]
+###### [ 수정 내용 ]
 
 <h6>내용 가장 하단 start 부분의 줄에 다음의 내용을 추가한다.</h6>
 
@@ -60,7 +60,7 @@
 
 #### 4 - 4. Driver 에 값을 입력한다.
 
-[ 기입 값 ]
+###### [ 기입 값 ]
 
     Name        : 원하는 명(문서에서는 Goldilocks)을 입력한다.
     Example URL : GOLDILOCKS JDBC URL 을 입력한다.
@@ -81,19 +81,25 @@
 
 #### 5 - 2. + 모양의 Create a New Alias 를 선택한다.
 
-#### 5 - 3. Name 에 원하는 명(문서에서는 Goldilocks)을 입력한다.
+#### 5 - 3. Alias 에 값을 입력한다.
 
-#### 5 - 4. Driver에 Drivers탭의 Name에서 입력한 명(문서에서는 Goldilocks)을 선택한다.
+###### [ 기입 값 ]
 
-#### 5 - 5. URL이 Drivers의 Example URL의 내용으로 자동으로 입력되나, 수정할 부분이 있다면 수정한다.
+    Name        : 원하는 명(문서에서는 Goldilocks)을 입력한다.
+    Driver      : Drivers탭의 Name에서 입력한 명(문서에서는 Goldilocks)을 선택한다.
+    URL         : Drivers의 Example URL의 내용으로 자동으로 입력되나, 수정할 부분이 있다면 수정한다.
+    UserName    : 데이터베이스 사용자 아이디를 입력한다.
+    Password    : 에 데이터베이스 사용자 비밀번호를 입력한다.
 
-#### 5 - 6. UserName에 데이터베이스 사용자 아이디를 입력한다.
+#### 5 - 4. Test 버튼을 클릭한 뒤, Connect 버튼을 눌러 연동이 되는지 확인한다.
 
-#### 5 - 7. Password에 데이터베이스 사용자 비밀번호를 입력한다.
+###### [ 연동이 되지 않는 경우 ]
 
-#### 5 - 8. Test 버튼을 클릭한 뒤, Connect 버튼을 눌러 연동이 되는지 확인한다.
+    데이터베이스 서버가 구동중인지 확인한다.
+    리스너가 구동중인지 확인한다.
+    기입한 IP 와 PORT 를 이용하여 클라이언트에서 서버로 통신이 가능한지 확인한다.
 
-#### 5 - 9. OK 버튼을 눌러 Database 에 접속한다.
+#### 5 - 5. OK 버튼을 눌러 Database 에 접속한다.
 
 ![squirrelsql_05](https://user-images.githubusercontent.com/9734988/33247215-aedc3fdc-d35f-11e7-9b69-88a406852b15.jpg)
 
