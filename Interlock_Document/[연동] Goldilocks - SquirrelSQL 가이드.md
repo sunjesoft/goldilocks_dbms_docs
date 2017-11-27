@@ -64,12 +64,12 @@
 
     Name        : 원하는 명(문서에서는 Goldilocks)을 입력한다.
     Example URL : GOLDILOCKS JDBC URL 을 입력한다.
-      GOLDILOCKS JDBC URL 은 jdbc:goldilocks://Server IP:Listener Port/DBName 로 구성된다.
-      DBName 은 아무 문자열이나 입력하면 되나 null 은 허용하지 않는다.
-      예) SERVER IP 가 192.168.0.50 이고 Listener Port 가 22581 인 경우 URL 구성
-         jdbc:goldilocks://192.168.0.50:22581/goldilocks
-    Class Name 에 GOLDILOCKS JDBC DRIVER NAME 을 입력한다.
-      GOLDILOCKS JDBC DRIVER NAME 은 sunje.goldilocks.jdbc.GoldilocksDriver 이다.
+                  GOLDILOCKS JDBC URL 은 jdbc:goldilocks://Server IP:Listener Port/DBName 로 구성된다.
+                    DBName 은 아무 문자열이나 입력하면 되나 null 은 허용하지 않는다.
+                    예) SERVER IP 가 192.168.0.50 이고 Listener Port 가 22581 인 경우 URL 구성
+                      jdbc:goldilocks://192.168.0.50:22581/goldilocks
+    Class Name  : GOLDILOCKS JDBC DRIVER NAME 을 입력한다.
+                  GOLDILOCKS JDBC DRIVER NAME 은 sunje.goldilocks.jdbc.GoldilocksDriver 이다.
 
 #### 4 - 6. OK 버튼을 클릭하여 Driver 를 등록한다.
 
