@@ -7,7 +7,7 @@
 #### 1 - 2. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
 
 
-[ 테스트 환경 ]
+###### [ 테스트 환경 ]
 
 <h6>
 
@@ -50,7 +50,7 @@
 
 #### 4 - 1. 설치 완료 후 goldilocks_home 의 폴더 구조는 다음과 같다.
 
-[ 폴더 구조 ]
+###### [ 폴더 구조 ]
 
 <h6>
 
@@ -131,20 +131,20 @@
 
 | 옵션 | 값 | 설명 |
 |:--  |:-- |:-- |
-|*(필수) DSN         ||데이터 원본 이름을 입력한다.<br/>(문서에서는 GOLDILOCKS 로 작성한다.)|
-|*(필수) HOST        ||Database Server IP 주소를 입력한다. <br/>예)192.168.0.50|
-|*(필수) PORT        ||Listener Port 를 입력한다. <br/>예)22581|
+|*(필수) DSN         ||데이터 원본 이름을 입력한다.<br/>(문서에서는 Goldilocks 로 작성한다.)|
+|*(필수) HOST        ||Database Server IP 주소를 입력한다. <br/>예) 192.168.0.50|
+|*(필수) PORT        ||Listener Port 를 입력한다. <br/>예) 22581|
 |UID         ||Database 사용자 아이디를 입력한다.|
 |CS Mode     |Default|Listener 속성에 따라 모드가 결정된다.|
 |            |Dedicated|Dedicated 모드로 접속한다.|
 |            |Shared|Shared 모드로 접속한다. 서버에서 SHARED SESSION 모드가 설정되어 있어야 한다.|
-|FAILOVER|Connection Retry(Count)|연결 실패 시, 서버 접속 시도 횟수를 입력한다.|
-|        |Connection Retry(Delay)|연결 실패 시, 서버 접속 시도 간격(단위 : 초)를 입력한다.|
+|FAILOVER|Connection Retry<br/>(Count)|연결 실패 시, 서버 접속 시도 횟수를 입력한다.|
+|        |Connection Retry<br/>(Delay)|연결 실패 시, 서버 접속 시도 간격(단위 : 초)를 입력한다.|
 |        |Type(Connection)|연결 실패 시, AlternateServers 로 연결한다.|
 |        |Type(Session)   |연결 실패 및 Statement 동작 중 연결이 끊어진 경우, AlternateServers 로 연결 후 Statement 를 복원하여 수행한다.|
-|        |Granularity(Non-atomic)|Failover 진행 중, 에러가 발생해도 Failover 를 진행한다.|
-|        |Granularity(Atomic) | Failover 진행 중, 에러가 발생하는 경우 Failover 를 중단하고 실패로 처리한다.|
-|        |AlternateServers| 연결 실패 시, 연결을 시도하는 서버 리스트(다중일 경우 , 로 구분)를 입력한다. <br/>예)HOST=192.168.0.51:PORT=22581,HOST=...|
+|        |Granularity<br/>(Non-atomic)|Failover 진행 중, 에러가 발생해도 Failover 를 진행한다.|
+|        |Granularity<br/>(Atomic) | Failover 진행 중, 에러가 발생하는 경우 Failover 를 중단하고 실패로 처리한다.|
+|        |AlternateServers| 연결 실패 시, 연결을 시도하는 서버 리스트(다중일 경우 , 로 구분)를 입력한다. <br/>예) HOST=192.168.0.51:PORT=22581,HOST=...|
 |Format  |DATE|날짜 타입 형식 문자열을 설정한다.|
 |        |TIME|시간 타입 형식 문자열을 설정한다.|
 |        |TIME WITH TIME ZONE|시간 + 타임존 타입 형식 문자열을 설정한다.|
