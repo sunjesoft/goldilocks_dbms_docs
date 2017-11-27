@@ -42,12 +42,13 @@
 #### 3 - 2. 인코딩을 UTF-8 로 하려는 경우 Squirrel-sql.bat 파일의 내용을 수정한다.
 
 
-###### [ 수정 내용 ]
+###### [ 수정 내용 ] 내용 가장 하단 start 부분의 줄에 다음의 내용을 추가한다.
 
-<h6>내용 가장 하단 start 부분의 줄에 다음의 내용을 추가한다.</h6>
+<h6>
 
     -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8
 
+</h6>
 
 ![squirrelsql_07](https://user-images.githubusercontent.com/9734988/33247179-763e7fe6-d35f-11e7-98e9-21291ee6f13d.JPG)
 
@@ -65,6 +66,8 @@
 
 ###### [ 기입 값 ]
 
+<h6>
+
     Name        : 원하는 명(문서에서는 Goldilocks)을 입력한다.
     Example URL : GOLDILOCKS JDBC URL 을 입력한다.
                   GOLDILOCKS JDBC URL 은 jdbc:goldilocks://Server IP:Listener Port/DBName 로 구성된다.
@@ -73,6 +76,8 @@
                       jdbc:goldilocks://192.168.0.50:22581/goldilocks
     Class Name  : GOLDILOCKS JDBC DRIVER NAME 을 입력한다.
                   GOLDILOCKS JDBC DRIVER NAME 은 sunje.goldilocks.jdbc.GoldilocksDriver 이다.
+
+</h6>
 
 #### 4 - 6. OK 버튼을 클릭하여 Driver 를 등록한다.
 
@@ -88,19 +93,27 @@
 
 ###### [ 기입 값 ]
 
+<h6>
+
     Name        : 원하는 명(문서에서는 Goldilocks)을 입력한다.
     Driver      : Drivers탭의 Name에서 입력한 명(문서에서는 Goldilocks)을 선택한다.
     URL         : Drivers의 Example URL의 내용으로 자동으로 입력되나, 수정할 부분이 있다면 수정한다.
     UserName    : 데이터베이스 사용자 아이디를 입력한다.
     Password    : 데이터베이스 사용자 비밀번호를 입력한다.
 
+</h6>
+
 #### 5 - 4. Test 버튼을 클릭한 뒤, Connect 버튼을 눌러 연동이 되는지 확인한다.
 
 ###### [ 연동이 되지 않는 경우 ]
 
+<h6>
+
     데이터베이스 서버가 구동중인지 확인한다.
     리스너가 구동중인지 확인한다.
     기입한 IP 와 PORT 를 이용하여 클라이언트에서 서버로 통신이 가능한지 확인한다.
+
+</h6>
 
 #### 5 - 5. OK 버튼을 눌러 Database 에 접속한다.
 
