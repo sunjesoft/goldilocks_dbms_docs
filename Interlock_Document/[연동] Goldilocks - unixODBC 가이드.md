@@ -18,7 +18,6 @@
     CLIENT gcc      : gcc(GCC) 4.8.5 20150623 (Red Hat 4.8.5-11)
     CLIENT unixODBC : unixODBC v2.3.4
 
-
 #### 3. unixODBC DRIVER MANAGER 다운로드
 
 [ 다운로드 방법 1 ]
@@ -46,7 +45,6 @@
 
     2017-09-13 07:02:50 (4.98 KB/s) - ‘unixODBC-2.3.4.tar.gz’ saved [1830660/1830660]
 
-
 #### 4. unixODBC DRIVER MANAGER 설치 전
 
 [ 설치 정보 ]
@@ -67,10 +65,9 @@
 
 #### 5. unixODBC DRIVER MANAGER 설치
 
-
- 1. tar.gz 파일을 압축해제한다.
- 2. 압축해제한 경로로 들어간다.
- 3. unixODBC 를 설치한다.
+1. tar.gz 파일을 압축해제한다.
+2. 압축해제한 경로로 들어간다.
+3. unixODBC 를 설치한다.
 
 
     $ tar xzf unixODBC-2.3.4.tar.gz
@@ -83,13 +80,11 @@
 
     $ make install
 
-
 #### 6. odbcinst 확인
 
-
- 1. unixODBC 가 설치된 경로로 이동한다.
- 2. bin 폴더로 이동한다.
- 3. odbcinst 실행파일을 수행하여 unixODBC 정보를 확인한다.
+1. unixODBC 가 설치된 경로로 이동한다.
+2. bin 폴더로 이동한다.
+3. odbcinst 실행파일을 수행하여 unixODBC 정보를 확인한다.
 
 
     $ cd /home/centos/unixODBC
@@ -110,7 +105,7 @@
 
 #### 7. odbc.ini 설정
 
- 1. USER DATA SOURCES 경로에 Goldilocks ODBC 를 등록한다.
+1. USER DATA SOURCES 경로에 Goldilocks ODBC 를 등록한다.
 
 
     $ cat /home/centos/.odbc.ini
@@ -130,6 +125,7 @@
 #### 8. unixODBC DRIVER MANAGER 연동
 
  1. 등록한 ODBC 명을 사용하여 Goldilocks 에 접속한다.
+
 
     $ cd /home/centos/unixODBC/bin
     $ ./isql -v GoldilocksODBC TEST test
