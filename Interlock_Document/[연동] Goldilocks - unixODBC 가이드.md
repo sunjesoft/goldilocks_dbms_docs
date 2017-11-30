@@ -60,12 +60,34 @@
 
 ###### [ 설치 정보 ]
 
+
+
 <h6>
 
     USER           : centos
     PATH           : /home/centos/unixODBC
     DATABASE IP    : 192.168.0.50
     LISTENER PORT  : 22581
+
+</h6>
+
+###### 1. centos 계정 환경파일에 Goldilocks 정보가 등록되어 있어야 한다.
+###### 2. centos 계정에서 Goldilocks 에 접속할 수 있어야 한다.
+
+<h6>
+
+    $ whoami
+    centos
+
+    $ echo $SHELL
+    /bin/bash
+
+    $ cat .bash_profile
+    ...
+    export GOLDILOCKS_HOME=/home/sunje/goldilocks_home
+    export PATH=$GOLDILOCKS_HOME/bin:$PATH
+    export LD_LIBRARY_PATH=$GOLDILOCKS_HOME/lib:$LD_LIBRARY_PATH
+
 
 </h6>
 
@@ -147,7 +169,7 @@
     #  SQLLEN 이 4 인 경우 libgoldilockscs-ul32.so
     # HOST   : DATABASE SERVER IP
     # PORT   : DATABASE LISTENER PORT
-    DRIVER = /home/centos/goldilocks_home/lib/libgoldilockscs-ul64.so
+    DRIVER = /home/sunje/goldilocks_home/lib/libgoldilockscs-ul64.so
     HOST   = 192.168.0.50
     PORT   = 22581
 
@@ -157,6 +179,7 @@
 
  1. unixODBC 접속명령어 isql 과, 등록한 ODBC 명을 사용하여 Goldilocks 에 접속한다.
 
+<h6>
 
     $ cd /home/centos/unixODBC/bin
     $ ./isql -v GoldilocksODBC TEST test
@@ -169,3 +192,5 @@
      |                                       |
      +---------------------------------------+
      SQL>
+
+</h6>
