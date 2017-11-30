@@ -1,37 +1,45 @@
-## Goldilocks unixODBC 연동 가이드
+# Goldilocks - unixODBC 연동 가이드
 
-#### 1. 개요
+## 1. 개요
 
-1. GOLDILOCKS ODBC DRIVER 를 이용하여 unixODBC DRIVER MANAGER 와 연동하는 방법을 설명한다.
-2. 이 문서는 http://www.unixodbc.org/ 에서 제공하는 unixODBC DRIVER MANAGER 를 기준으로 설명한다.
-3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
-4. unixODBC 설치 시 configure 옵션은 필요에 따라 부여하며 이 문서에서는 설치 경로만 지정한다.
-5. unixODBC 설치 시 컴파일 수행을 위한 환경을 체크하며, 환경에 맞는 바이너리가 없어 에러가 발생하는 경우 직접 설치해야한다.
+#### 1 - 1. GOLDILOCKS ODBC DRIVER 를 이용하여 unixODBC 와 연동하는 방법을 설명한다.
 
-#### 2. 설치 환경
+#### 1 - 2. 이 문서는 http://www.unixodbc.org/ 에서 제공하는 unixODBC 를 기준으로 설명한다.
 
+#### 1 - 3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
 
-    SERVER OS       : CentOS Linux release 7.2.1511
-    SERVER DATABASE : Goldilocks 3.1.0 r23226
+#### 1 - 4. unixODBC 설치 시 configure 옵션은 필요에 따라 부여하며 이 문서에서는 설치 경로만 지정한다.
 
-    CLIENT OS       : CentOS Linux release 7.2.1511
-    CLIENT gcc      : gcc(GCC) 4.8.5 20150623 (Red Hat 4.8.5-11)
-    CLIENT unixODBC : unixODBC v2.3.4
+#### 1 - 5. unixODBC 설치 시 컴파일 수행을 위한 환경을 체크하며, 환경에 맞는 바이너리가 없어 에러가 발생하는 경우 직접 설치해야한다.
 
-#### 3. unixODBC DRIVER MANAGER 다운로드
+###### [ 테스트 환경 ]
 
-[ 다운로드 방법 1 ]
+<h6>
 
-1. http://www.unixodbc.org/ 사이트에 접속한다.
-2. Download 탭을 클릭한 뒤, tar.gz 압축파일을 다운로드 한다.
-3. 다운로드한 압축파일을 클라이언트 OS 로 전송한다.
+    OS       : CentOS Linux release 7.2.1511
+    DATABASE : Goldilocks 3.1.0 r23226
+    gcc      : gcc(GCC) 4.8.5 20150623 (Red Hat 4.8.5-11)
+    unixODBC : unixODBC v2.3.4
+
+</h6>
+
+## 2. unixODBC 다운로드
+
+#### 2 - 1. 다운로드 방법 1
+
+###### 1. http://www.unixodbc.org/ 사이트에 접속한다.
+
+###### 2. Download 탭을 클릭한 뒤, tar.gz 압축파일을 다운로드 한다.
+
+###### 3. 다운로드한 압축파일을 OS 로 전송한다.
 
 <img src="E:\pic\unixODBC\unixODBC_01.jpg" alt="unixODBC_01" style="width : 450px;"/>
 
-[ 다운로드 방법 2 ]
+#### 2 - 2. 다운로드 방법 2
 
-1. 클라이언트 OS 에서 wget 명령어를 사용하여 다운로드 한다.
+###### 1. 클라이언트 OS 에서 wget 명령어를 사용하여 다운로드 한다.
 
+<h6>
 
     $ wget http://www.unixodbc.org/unixODBC-2.3.4.tar.gz
     --2017-09-13 06:56:49--  http://www.unixodbc.org/unixODBC-2.3.4.tar.gz
@@ -45,19 +53,22 @@
 
     2017-09-13 07:02:50 (4.98 KB/s) - ‘unixODBC-2.3.4.tar.gz’ saved [1830660/1830660]
 
-#### 4. unixODBC DRIVER MANAGER 설치 전
+</h6>
 
-[ 설치 정보 ]
+## 3. unixODBC 설치 환경
 
+###### [ 설치 정보 ]
 
-    사용자 계정       : centos
-    설치 경로         : /home/centos/unixODBC
+<h6>
 
-    서버 IP           : 192.168.0.50
-    데이터베이스 PORT : 22581
+    USER           : centos
+    PATH           : /home/centos/unixODBC
+    DATABASE IP    : 192.168.0.50
+    LISTENER PORT  : 22581
+
+</h6>
 
 [ unixODBC 32 비트 설치 시 환경변수 ]
-
 
     export CFLAGS="-m32 -DBUILD_LEGACY_64_BIT_MODE=1"
     export LDFLAGS=-m32
