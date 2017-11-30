@@ -14,12 +14,20 @@
 
 ###### [ 테스트 환경 ]
 
+###### 1. Goldilocks 는 centos 계정에 설치되어 있다.
+
+###### 2. 사전에 centos 계정에 Goldilocks 환경변수가 등록되어 있다.
+
+###### 3. centos 계정에 unixODBC 를 설치한 뒤, unixODBC 를 통해 Goldilocks 에 접속한다.
+
 <h6>
 
     OS       : CentOS Linux release 7.2.1511
+    OS USER  : centos
     DATABASE : Goldilocks 3.1.0 r23226
     gcc      : gcc(GCC) 4.8.5 20150623 (Red Hat 4.8.5-11)
     unixODBC : unixODBC v2.3.4
+
 
 </h6>
 
@@ -60,34 +68,13 @@
 
 ###### [ 설치 정보 ]
 
-
-
 <h6>
 
-    USER           : centos
-    PATH           : /home/centos/unixODBC
-    DATABASE IP    : 192.168.0.50
-    LISTENER PORT  : 22581
-
-</h6>
-
-###### 1. centos 계정 환경파일에 Goldilocks 정보가 등록되어 있어야 한다.
-###### 2. centos 계정에서 Goldilocks 에 접속할 수 있어야 한다.
-
-<h6>
-
-    $ whoami
-    centos
-
-    $ echo $SHELL
-    /bin/bash
-
-    $ cat .bash_profile
-    ...
-    export GOLDILOCKS_HOME=/home/sunje/goldilocks_home
-    export PATH=$GOLDILOCKS_HOME/bin:$PATH
-    export LD_LIBRARY_PATH=$GOLDILOCKS_HOME/lib:$LD_LIBRARY_PATH
-
+    unixODBC OS USER   : centos
+    DATABASE HOME PATH : /home/centos/goldilocks_home
+    unixODBC HOME PATH : /home/centos/unixODBC
+    DATABASE IP        : 192.168.0.50
+    LISTENER PORT      : 22581
 
 </h6>
 
@@ -123,26 +110,11 @@
 
 ## 4. odbcinst 확인
 
-#### 4 - 1. unixODBC 가 설치된 경로로 이동한다.
-
-#### 4 - 2. bin 폴더로 이동한다.
-
-#### 4 - 3. odbcinst 실행파일을 수행하여 unixODBC 정보를 확인한다.
+#### 4 - 1. odbcinst 실행파일을 수행하여 unixODBC 정보를 확인한다.
 
 <h6>
 
-    unixODBC 64 bit 인 경우 : SQLLEN 8
-    unixODBC 32 bit 인 경우 : SQLLEN 4
-
-</h6>
-
-<h6>
-
-    $ cd /home/centos/unixODBC
-
-    $ cd bin
-
-    $ ./odbcinst -j
+    $ ./home/centos/unixODBC/bin/odbcinst -j
     unixODBC 2.3.4
     DRIVERS............: /home/centos/unixODBC/etc/odbcinst.ini
     SYSTEM DATA SOURCES: /home/centos/unixODBC/etc/odbc.ini
@@ -154,6 +126,12 @@
 
 </h6>
 
+<h6>
+
+    unixODBC 64 bit 인 경우 : SQLLEN 8
+    unixODBC 32 bit 인 경우 : SQLLEN 4
+
+</h6>
 
 #### 4 - 4. USER DATA SOURCES 경로의 .odbc.ini 파일에 내용을 등록한다.
 
@@ -169,7 +147,7 @@
     #  SQLLEN 이 4 인 경우 libgoldilockscs-ul32.so
     # HOST   : DATABASE SERVER IP
     # PORT   : DATABASE LISTENER PORT
-    DRIVER = /home/sunje/goldilocks_home/lib/libgoldilockscs-ul64.so
+    DRIVER = /home/centos/goldilocks_home/lib/libgoldilockscs-ul64.so
     HOST   = 192.168.0.50
     PORT   = 22581
 
