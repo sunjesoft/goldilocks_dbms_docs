@@ -14,11 +14,9 @@
 
 ###### [ 테스트 환경 ]
 
-###### 1. Goldilocks 는 centos 계정에 설치되어 있다.
+###### 1. 사전에 centos 계정에 Goldilocks 환경변수가 등록되어 있다.
 
-###### 2. 사전에 centos 계정에 Goldilocks 환경변수가 등록되어 있다.
-
-###### 3. centos 계정에 unixODBC 를 설치한 뒤, unixODBC 를 통해 Goldilocks 에 접속한다.
+###### 2. centos 계정에 unixODBC 를 설치한 뒤, unixODBC 접속명령어 isql 을 통해 Goldilocks 에 접속한다.
 
 <h6>
 
@@ -27,7 +25,6 @@
     DATABASE : Goldilocks 3.1.0 r23226
     gcc      : gcc(GCC) 4.8.5 20150623 (Red Hat 4.8.5-11)
     unixODBC : unixODBC v2.3.4
-
 
 </h6>
 
@@ -39,15 +36,18 @@
 
 ###### 2. Download 탭을 클릭한 뒤, tar.gz 압축파일을 다운로드 한다.
 
-###### 3. 다운로드한 압축파일을 OS 로 전송한다.
+###### 3. 다운로드한 압축파일을 전송한다.
 
 ![unixodbc_01](https://user-images.githubusercontent.com/9734988/33422347-be724928-d5f8-11e7-842b-c71ca64deba9.jpg)
 
 #### 2 - 2. 다운로드 방법 2
 
-###### 1. 클라이언트 OS 에서 wget 명령어를 사용하여 다운로드 한다.
+###### 1. wget 명령어를 사용하여 다운로드 한다.
 
 <h6>
+
+    $ whoami
+    centos
 
     $ wget http://www.unixodbc.org/unixODBC-2.3.4.tar.gz
 
@@ -78,21 +78,21 @@
 
 </h6>
 
-###### [ 32 Bit 설치 시 환경변수 ]
+#### 3 - 1. unixODBC 32 Bit 설치 시 환경변수를 잡아준다.
 
 <h6>
 
-    export CFLAGS="-m32 -DBUILD_LEGACY_64_BIT_MODE=1"
-    export LDFLAGS=-m32
-    export CXXFLAGS=-m32
+    $ export CFLAGS="-m32 -DBUILD_LEGACY_64_BIT_MODE=1"
+    $ export LDFLAGS=-m32
+    $ export CXXFLAGS=-m32
 
 </h6>
 
-#### 3 - 1. tar.gz 파일을 압축해제한다.
+#### 3 - 2. tar.gz 파일을 압축해제한다.
 
-#### 3 - 2. 압축해제한 경로로 들어간다.
+#### 3 - 3. 압축해제한 경로로 들어간다.
 
-#### 3 - 3. unixODBC 를 설치한다.
+#### 3 - 4. unixODBC 를 설치한다. --prefix 옵션을 사용하여 설치 경로를 지정한다.
 
 <h6>
 
@@ -155,7 +155,7 @@
 
 ## 5. unixODBC 로 Goldilocks 접속
 
- 1. unixODBC 접속명령어 isql 과, 등록한 ODBC 명을 사용하여 Goldilocks 에 접속한다.
+#### 5 - 1. unixODBC 접속명령어 isql 과, 등록한 ODBC 명을 사용하여 Goldilocks 에 접속한다.
 
 <h6>
 
