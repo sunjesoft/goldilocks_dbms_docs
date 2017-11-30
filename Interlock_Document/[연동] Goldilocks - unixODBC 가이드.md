@@ -172,3 +172,26 @@
      SQL>
 
 </h6>
+
+###### [ 연동이 되지 않는 경우 ]
+
+<h6>
+
+    데이터베이스 서버가 구동중인지 확인한다.
+    리스너가 구동중인지 확인한다.
+    unixODBC 설치계정에서 Goldilocks 환경변수가 등록되어 있는지 확인한다. (참조 1)
+
+</h6>
+
+<h6>
+
+    (참조 1)
+    $ echo $SHELL
+    /bin/bash
+
+    $ cat ~/.bash_profile
+    export GOLDILOCKS_HOME=/home/centos/goldilocks_home
+    export PATH=$GOLDILOCKS_HOME/bin:$PATH
+    export LD_LIBRARY_PATH=$GOLDILOCKS_HOME/lib:$LD_LIBRARY_PATH
+
+</h6>
