@@ -82,7 +82,7 @@
 
 <h6>
 
-| OS비트  | unixODBC비트  | SQLLEN | 환경변수 | Goldilocks 드라이버 |
+| OS Bit  | unixODBC Bit  | SQLLEN | 환경변수 | Goldilocks 드라이버 |
 |:--      |:--            |:--     |:--       |:--                  |
 | 64      | 64            | 8      | export CFLAGS="-DBUILD_LEGACY_64_BIT_MODE=1" | libgoldilockscs-ul64.so: <br/>ELF 64-bit LSB shared object, x86-64 |
 | 64      | 64            | 4      | export CFLAGS="-DBUILD_LEGACY_64_BIT_MODE=1" | libgoldilockscs-ul32.so: <br/>ELF 64-bit LSB shared object, x86-64 |
