@@ -4,13 +4,13 @@
 
 #### 1 - 1. GOLDILOCKS ODBC DRIVER 를 이용하여 unixODBC 와 연동하는 방법을 설명한다.
 
-#### 1 - 2. 이 문서는 http://www.unixodbc.org/ 에서 제공하는 unixODBC 를 기준으로 설명한다.
+#### 1 - 2. http://www.unixodbc.org/ 에서 제공하는 unixODBC 를 기준으로 설명한다.
 
-#### 1 - 3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
+#### 1 - 3. 연동을 위한 환경 구축은 사용자가 해야한다. 선재소프트는 이 부분에 대해 기술지원을 진행하지 않는다.
 
-#### 1 - 4. unixODBC 설치는 사용자 계정에서 진행되며, 이 문서에서는 옵션으로 설치 경로만 지정한다.
+#### 1 - 4. 설치 시, 옵션으로 설치 경로만 지정한다. 다른 옵션에 대해서는 사용자가 환경에 맞게 설정한다.
 
-#### 1 - 5. unixODBC 설치 시 컴파일 수행을 위한 환경을 체크하며, 환경이 맞지않아 에러가 발생하는 경우 직접 설치해야한다.
+#### 1 - 5. 설치 시, 환경이 맞지않아 에러가 발생하는 경우 사용자가 설치해야한다.
 
 ###### [ 테스트 환경 ]
 
@@ -29,7 +29,7 @@
 
 ## 2. unixODBC 다운로드
 
-#### 2 - 1. 다운로드 방법 1
+#### 2 - 1. 다운로드 방법 [1]
 
 ###### 1. http://www.unixodbc.org/ 사이트에 접속한다.
 
@@ -39,7 +39,7 @@
 
 ![unixodbc_01](https://user-images.githubusercontent.com/9734988/33422347-be724928-d5f8-11e7-842b-c71ca64deba9.jpg)
 
-#### 2 - 2. 다운로드 방법 2
+#### 2 - 2. 다운로드 방법 [2]
 
 ###### 1. wget 명령어를 사용하여 다운로드 한다.
 
@@ -76,13 +76,13 @@
 
 </h6>
 
-#### 3 - 1. unixODBC 설치 시, 환경에 따라 다음값 및 드라이버를 사용한다.
+#### 3 - 1. unixODBC 설치 시, Bit 및 SQLLEN 에 따라 특정 환경변수 및 드라이버를 사용한다.
 
 ###### unixODBC 가 32 비트인 경우, Goldilocks 라이브러리도 32 비트여야 한다.
 
 <h6>
 
-| OS 비트 | unixODBC 비트 | SQLLEN | 환경변수 | Goldilocks 드라이버 |
+| OS</br>비트 | unixODBC</br>비트 | SQLLEN | 환경변수 | Goldilocks 드라이버 |
 |:--      |:--            |:--     |:--       |:--                  |
 | 64      | 64            | 8      | export CFLAGS="-DBUILD_LEGACY_64_BIT_MODE=1" | libgoldilockscs-ul64.so: <br/>ELF 64-bit LSB shared object, x86-64 |
 | 64      | 64            | 4      | export CFLAGS="-DBUILD_LEGACY_64_BIT_MODE=1" | libgoldilockscs-ul32.so: <br/>ELF 64-bit LSB shared object, x86-64 |
@@ -110,14 +110,15 @@
 
 </h6>
 
-#### 3 - 5. 환경변수를 잡아준다.
+#### 3 - 5. unixODBC 환경변수를 적용한다.
 
 <h6>
 
-    $ cat .bash_profile
-    export unixODBC=/home/centos/unixODBC
-    export PATH=$unixODBC/bin:$PATH
-    export LD_LIBRARY_PATH=$unixODBC/lib:$LD_LIBRARY_PATH
+    $ export unixODBC=/home/centos/unixODBC
+
+    $ export PATH=$unixODBC/bin:$PATH
+
+    $ export LD_LIBRARY_PATH=$unixODBC/lib:$LD_LIBRARY_PATH
 
 </h6>
 
@@ -127,7 +128,7 @@
 
 <h6>
 
-    $ ./home/centos/unixODBC/bin/odbcinst -j
+    $ odbcinst -j
     unixODBC 2.3.4
     DRIVERS............: /home/centos/unixODBC/etc/odbcinst.ini
     SYSTEM DATA SOURCES: /home/centos/unixODBC/etc/odbc.ini
@@ -139,7 +140,7 @@
 
 </h6>
 
-#### 4 - 4. USER DATA SOURCES 경로의 .odbc.ini 파일에 내용을 등록한다.
+#### 4 - 4. USER DATA SOURCES 경로의 .odbc.ini 파일에 Goldilocks 를 등록한다.
 
 <h6>
 
@@ -157,14 +158,13 @@
 
 </h6>
 
-## 5. unixODBC 로 Goldilocks 접속
+## 5. unixODBC 접속 바이너리(isql)을 이용하여 Goldilocks 접속테스트
 
-#### 5 - 1. unixODBC 접속명령어 isql 과, 등록한 ODBC 명을 사용하여 Goldilocks 에 접속한다.
+#### 5 - 1. 등록한 ODBC 명을 사용하여 Goldilocks 에 접속한다.
 
 <h6>
 
-    $ cd /home/centos/unixODBC/bin
-    $ ./isql -v GoldilocksODBC TEST test
+    $ isql -v GoldilocksODBC TEST test
      +---------------------------------------+
      | Connected!                            |
      |                                       |
@@ -194,6 +194,7 @@
     /bin/bash
 
     $ cat ~/.bash_profile
+    # Goldilocks 환경변수
     export GOLDILOCKS_HOME=/home/centos/goldilocks_home
     export PATH=$GOLDILOCKS_HOME/bin:$PATH
     export LD_LIBRARY_PATH=$GOLDILOCKS_HOME/lib:$LD_LIBRARY_PATH
