@@ -8,20 +8,19 @@
 
 #### 1 - 3. 연동을 위한 환경 구축은 사용자가 해야 할 사항이므로, 선재소프트는 그 부분에 대한 기술지원을 진행하지 않는다.
 
-#### 1 - 4. unixODBC 설치는 사용자 계정에서 진행되며, configure 옵션은 필요에 따라 부여한다. 이 문서에서는 설치 경로만 지정한다.
+#### 1 - 4. unixODBC 설치는 사용자 계정에서 진행되며, 이 문서에서는 옵션으로 설치 경로만 지정한다.
 
-#### 1 - 5. unixODBC 설치 시 컴파일 수행을 위한 환경을 체크하며, 환경에 맞는 바이너리가 없어 에러가 발생하는 경우 직접 설치해야한다.
+#### 1 - 5. unixODBC 설치 시 컴파일 수행을 위한 환경을 체크하며, 환경이 맞지않아 에러가 발생하는 경우 직접 설치해야한다.
 
 ###### [ 테스트 환경 ]
 
-###### 1. 사전에 centos 계정에 Goldilocks 환경변수가 등록되어 있다.
+###### 1. centos 계정에 unixODBC 를 설치하며, 계정에 Goldilocks 환경변수가 등록되어 있다.
 
-###### 2. centos 계정에 unixODBC 를 설치한 뒤, unixODBC 접속명령어 isql 을 통해 Goldilocks 에 접속한다.
+###### 2. centos 계정은 Goldilocks 서버와 통신 가능해야 한다.
 
 <h6>
 
     OS       : CentOS Linux release 7.2.1511
-    OS USER  : centos
     DATABASE : Goldilocks 3.1.0 r23226
     gcc      : gcc(GCC) 4.8.5 20150623 (Red Hat 4.8.5-11)
     unixODBC : unixODBC v2.3.4
@@ -70,7 +69,6 @@
 
 <h6>
 
-    unixODBC OS USER   : centos
     DATABASE HOME PATH : /home/centos/goldilocks_home
     unixODBC HOME PATH : /home/centos/unixODBC
     DATABASE IP        : 192.168.0.50
@@ -78,13 +76,17 @@
 
 </h6>
 
-#### 3 - 1. unixODBC 32 Bit 설치 시 환경변수를 잡아준다.
+#### 3 - 1. unixODBC 설치 시, 환경에 따라 다음값 및 드라이버를 사용한다.
+
+###### unixODBC 가 32 비트인 경우, Goldilocks 라이브러리도 32 비트여야 한다.
 
 <h6>
 
-    $ export CFLAGS="-m32 -DBUILD_LEGACY_64_BIT_MODE=1"
-    $ export LDFLAGS=-m32
-    $ export CXXFLAGS=-m32
+| OS 비트 | unixODBC 비트 | SQLLEN | 환경변수 | Goldilocks 드라이버 |
+|:--      |:--            |:--     |:--       |:--                  |
+| 64      | 64            | 8      | export CFLAGS="-DBUILD_LEGACY_64_BIT_MODE=1" | libgoldilockscs-ul64.so: <br/>ELF 64-bit LSB shared object, x86-64 |
+| 64      | 64            | 4      | export CFLAGS="-DBUILD_LEGACY_64_BIT_MODE=1" | libgoldilockscs-ul32.so: <br/>ELF 64-bit LSB shared object, x86-64 |
+| 64      | 32            | 4      | export CFLAGS="-m32 -DBUILD_LEGACY_64_BIT_MODE=1"<br/>export LDFLAGS=-m32<br/>export CXXFLAGS=-m32 | libgoldilockscs.so: <br/>ELF 32-bit LSB shared object, Intel 80386 |
 
 </h6>
 
@@ -92,7 +94,7 @@
 
 #### 3 - 3. 압축해제한 경로로 들어간다.
 
-#### 3 - 4. unixODBC 를 설치한다. --prefix 옵션을 사용하여 설치 경로를 지정한다.
+#### 3 - 4. --prefix 옵션을 사용하여 설치 경로를 지정한다.
 
 <h6>
 
@@ -105,6 +107,17 @@
     $ make
 
     $ make install
+
+</h6>
+
+#### 3 - 5. 환경변수를 잡아준다.
+
+<h6>
+
+    $ cat .bash_profile
+    export unixODBC=/home/centos/unixODBC
+    export PATH=$unixODBC/bin:$PATH
+    export LD_LIBRARY_PATH=$unixODBC/lib:$LD_LIBRARY_PATH
 
 </h6>
 
@@ -126,13 +139,6 @@
 
 </h6>
 
-<h6>
-
-    unixODBC 64 bit 인 경우 : SQLLEN 8
-    unixODBC 32 bit 인 경우 : SQLLEN 4
-
-</h6>
-
 #### 4 - 4. USER DATA SOURCES 경로의 .odbc.ini 파일에 내용을 등록한다.
 
 <h6>
@@ -142,11 +148,9 @@
     GoldilocksODBC = Goldilocks ODBC Driver
 
     [GoldilocksODBC]
-    # DRIVER : DATABASE ODBC DRIVER
-    #  SQLLEN 이 8 인 경우 libgoldilockscs-ul64.so
-    #  SQLLEN 이 4 인 경우 libgoldilockscs-ul32.so
-    # HOST   : DATABASE SERVER IP
-    # PORT   : DATABASE LISTENER PORT
+    # DRIVER : unixODBC 환경에 맞는 3 - 1 의 Goldilocks Driver 를 참조한다.
+    # HOST   : 데이터베이스 서버 IP
+    # PORT   : 데이터베이스 리스너 PORT
     DRIVER = /home/centos/goldilocks_home/lib/libgoldilockscs-ul64.so
     HOST   = 192.168.0.50
     PORT   = 22581
