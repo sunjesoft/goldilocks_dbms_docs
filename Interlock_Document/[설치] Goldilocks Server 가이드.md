@@ -83,29 +83,12 @@
 
 <h6>
 
-    StackOverFlow 요청한상태
-    https://stackoverflow.com/questions/47645225/kernel-parameters-setting-on-aix-hpux-linux
 
 </h6>
 
 ###### [HP-UX]
 
 <h6>
-
-    StackOverFlow 요청한상태
-    https://stackoverflow.com/questions/47645225/kernel-parameters-setting-on-aix-hpux-linux
-
-    # kctune shmmax = 4294967296
-    # kctune shmmni = 4096
-
-    # kctune semmsl = 250
-    # kctune semmni = 128
-    # kctune semmns = 32000
-
-    파라미터를 못찾음
-    # kctune shmall = 1048576
-    # kctune sem = 250 32000 100 128
-    # semopm = 100
 
 </h6>
 
