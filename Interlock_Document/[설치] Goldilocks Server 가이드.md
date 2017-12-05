@@ -53,6 +53,8 @@
 
 ###### [LINUX]
 
+###### 커널이 3.0.0 이상인 경우 RemoveIPC 값을 no 로 변경한다.
+
 <h6>
 
     # vi /etc/sysctl.conf
@@ -65,8 +67,6 @@
     # sysctl -p
 
 </h6>
-
-######  커널이 3.0.0 이상인 경우 RemoveIPC 값을 no 로 변경한다.
 
 <h6>
 
@@ -146,7 +146,7 @@
 
 ###### goldilocks server package 가 없는 경우 technet@sunjesoft.com 에 요청한다.
 
-#### 4 - 1. goldilocks-server-`<version>`-`<os>`-`<bit>`.tar.gz 파일을 압축 해제한다.
+#### 4 - 1. goldilocks-server-<<version>>-<<os>>-<<bit>>.tar.gz 파일을 압축 해제한다.
 
 <h6>
 
@@ -200,9 +200,11 @@
 
 ###### license 가 없는 경우 technet@sunjesoft.com 에 요청한다.
 
+###### goldilocks_home/license 폴더에 license 파일로 저장한다.
+
 <h6>
 
-   $ cp license /home/sundb/goldilocks_home/license/license
+    $ cp license /home/sundb/goldilocks_home/license/license
 
 </h6>
 
@@ -260,7 +262,7 @@
 <h6>
 
 | 옵션 | 설명 | 기본값 |
-|:--   |:--   |
+|:--   |:--   |:--     |
 | db_name | 데이터베이스 명 | goldilocks |
 | db_comment | 데이터베이스에 대한 설명 | goldilocks database |
 | timezone | 타임존 | +09:00 |
@@ -270,6 +272,7 @@
 | cluster | 데이터베이스를 클러스터 모드로 변경 | <br/> 옵션 미 부여 시, STAND ALONE 으로 생성|
 | member | 클러스터 모드 시 멤버 명 | G1N1 |
 | port | 클러스터 모드 시 포트 | 10101 |
+| host | 클러스터 모드 시 아이피 | 127.0.0.1 |
 
 </h6>
 
@@ -454,5 +457,5 @@
 
     $ gsql SAMPLE sample
     gSQL>
-    
+
 </h6>
