@@ -146,7 +146,7 @@
 
 ###### goldilocks server package 가 없는 경우 technet@sunjesoft.com 에 요청한다.
 
-#### 4 - 1. goldilocks-server-<<version>>-<<os>>-<<bit>>.tar.gz 파일을 압축 해제한다.
+#### 4 - 1. goldilocks-server-[version]-[os]-[bit].tar.gz 파일을 압축 해제한다.
 
 <h6>
 
@@ -267,9 +267,9 @@
 | db_comment | 데이터베이스에 대한 설명 | goldilocks database |
 | timezone | 타임존 | +09:00 |
 | character_set | 데이터베이스 인코딩 | UTF8 |
-| char_length_unit | 문자 단위 | OCTETS |
+| char_length_unit | 문자 저장 단위 | OCTETS |
 | home | goldilocks.properties.conf 파일 | $GOLDILOCKS_DATA/conf/goldilocks.properties.conf |
-| cluster | 데이터베이스를 클러스터 모드로 변경 | <br/> 옵션 미 부여 시, STAND ALONE 으로 생성|
+| cluster | 데이터베이스를 클러스터 모드로 변경 | 옵션 미 부여 시, STAND ALONE|
 | member | 클러스터 모드 시 멤버 명 | G1N1 |
 | port | 클러스터 모드 시 포트 | 10101 |
 | host | 클러스터 모드 시 아이피 | 127.0.0.1 |
