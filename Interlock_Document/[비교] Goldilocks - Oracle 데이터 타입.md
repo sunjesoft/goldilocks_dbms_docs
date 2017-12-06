@@ -17,7 +17,7 @@
 |:--     |:--      |:--      |:--         |:--      |:--      |:-- |
 | NUMBER |  |  | NUMBER |  |  | |
 | NUMBER(p)    | 1 | 38 | NUMBER(p) | 1 | 38 | |
-| NUMBER(p, s) | p : 1<br/>s : -84 | p : 38<br/>s : 127 | NUMBER(p, s) | p : 1<br/>s : -84 | p : 38<br/>s : 128 | |
+| NUMBER(p, s) | p : 1<br/>s : -84 | p : 38<br/>s : 127 | NUMBER(p, s) | p : 1<br/>s : -84 | p : 38<br/>s : 127 | |
 | INT | | | INT | | | |
 | FLOAT | | | FLOAT | | | |
 | DOUBLE | | | DOUBLE | | | |
@@ -32,6 +32,7 @@
 | VARCHAR2(n) | 1 byte | 4000 byte | VARCHAR2(n) | 1 byte | 4000 byte | |
 | NCHAR(n) | 1 char | 2000 char | CHAR(n CHARACTER) | 1 char | 2000 char | |
 | NVARCHAR2(n) | 1 char | 4000 char | VARCHAR(n CHARACTER) | 1 char | 4000 char | |
+| RAW | 1 byte | 2000 byte | BINARY | 1 byte | 2000 byte | |
 
 ## 4. 대용량 타입
 
@@ -39,9 +40,8 @@
 |:--     |:--      |:--      |:--         |:--      |:--      |:--   |
 | LONG | 1 byte | 2 Gbyte | LONG VARCHAR | 1 byte | 100 MByte | |
 | CLOB | 1 byte | 4 Gbyte | LONG VARCHAR | 1 byte | 100 MByte | |
-| NCLOB | 1 byte | 4 Gbyte | LONG VARCHAR | 1 byte | 100 MByte | |
 | BLOB | 1 byte | 2 Gbyte | LONG VARBINARY | 1 byte | 100 MByte | |
-| RAW | 1 byte | 2000 byte | BINARY | 1 byte | 2000 byte | |
+
 
 
 ## 5. 날짜&시간 타입
