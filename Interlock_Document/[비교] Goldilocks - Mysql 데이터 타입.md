@@ -51,8 +51,8 @@
 | BLOB | | 65535 byte | LONG VARBINARY | | 100 Mega byte | |
 | MEDIUMBLOB | | 16777215 byte | LONG VARBINARY | | 100 Mega byte | |
 | LONGBLOB | | 4294967295 byte | LONG VARBINARY | | 100 Mega byte | |
-| TINYTEXT | | 255 char | CHAR(n CHAR) | | 2000 char | |
-| TEXT | | 65535 char | LONG VARCHAR | | 100 Mega byte | |
+| TINYTEXT | | 255 char | VARCHAR(n CHAR) | | 4000 char | |
+| TEXT | | 65535 char | VARCHAR(n CHAR) | | 4000 char | 4000 char 이상<br/>LONG VARCHAR |
 | MEDIUMTEXT | | 16777215 char | LONG VARCHAR | | 100 Mega byte | |
 | LONGTEXT | | 4294967295 char | LONG VARCHAR | | 100 Mega byte | |
 
