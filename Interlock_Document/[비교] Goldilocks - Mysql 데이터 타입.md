@@ -15,6 +15,8 @@
 
 ###### Goldilocks 는 unsigned native 타입은 지원하지 않는다.
 
+<h6>
+
 | Mysql | 최소 값 | 최대 값 | Goldilocks | 최솟값 | 최댓값 | 비고 |
 |:--     |:--      |:--      |:--         |:--      |:--      |:-- |
 | BOOL | 0 | 1 | BOOLEAN | FALSE | TRUE | |
@@ -33,8 +35,11 @@
 | FLOAT | | | NATIVE_REAL | | | |
 | DOUBLE | | | NATIVE_DOUBLE | | | |
 
+</h6>
 
 ## 3. 문자 타입
+
+<h6>
 
 | Mysql | 최소 값 | 최대 값 | Goldilocks | 최소 값 | 최대 값 | 비고 |
 |:--     |:--      |:--      |:--         |:--      |:--      |:--   |
@@ -51,8 +56,11 @@
 | MEDIUMTEXT | | 16777215 char | LONG VARCHAR | | 100 Mega byte | |
 | LONGTEXT | | 4294967295 char | LONG VARCHAR | | 100 Mega byte | |
 
+</h6>
 
 ## 4. 날짜&시간 타입
+
+<h6>
 
 | Mysql | 최소 값 | 최대 값 | Goldilocks | 최소 값 | 최대 값 | 비고 |
 |:--    |:--      |:--      |:--         |:--      |:--      |:--   |
@@ -63,10 +71,4 @@
 | TIME(n) | -838:59:59.000000 | 838:59:59.000000 | TIME | 00:00:00.000000 | 23:59:59.999999 | HH24:MI:SS.FF6 |
 | YEAR | 1901 | 2155 | DATE |  4714-11-24 BC | 9999-12-31 AD | YYYY-MM-DD HH24:MI:SS |
 
-
-참고사이트
-http://ra2kstar.tistory.com/82
-http://www.sqlines.com/mysql-to-oracle
-https://dev.mysql.com/doc/refman/5.7/en/numeric-type-overview.html
-https://dev.mysql.com/doc/refman/5.7/en/string-type-overview.html
-https://dev.mysql.com/doc/refman/5.7/en/date-and-time-type-overview.html
+</h6>
