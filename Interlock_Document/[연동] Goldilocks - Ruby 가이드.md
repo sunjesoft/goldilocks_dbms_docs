@@ -11,12 +11,13 @@
 
 ## 2. Ruby ODBC 를 이용하여 Goldilocks 접속
 
-###### JDBC 연동는 '3. Ruby JDBC 를 이용하여 Goldilocks 접속' 을 참조한다.
+###### [ 참조 ] JDBC 연동는 '3. Ruby JDBC 를 이용하여 Goldilocks 접속' 을 참조한다.
 
 ###### [ 테스트 환경 ]
 
-###### 1. centos 계정에 ruby 를 설치하며, 계정은 unixODBC 를 통해 Goldilocks 에 접속할 수 있어야 한다.<br/>
-unixODBC 연동은 https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Interlock_Document/%5B%EC%97%B0%EB%8F%99%5D%20Goldilocks%20-%20unixODBC%20%EA%B0%80%EC%9D%B4%EB%93%9C.md 링크를 참조한다.
+###### 1. centos 계정에 ruby 를 설치하며, 계정은 unixODBC 를 통해 Goldilocks 에 접속할 수 있어야 한다.
+###### unixODBC 연동은 아래 링크를 참조한다.
+###### https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Interlock_Document/%5B%EC%97%B0%EB%8F%99%5D%20Goldilocks%20-%20unixODBC%20%EA%B0%80%EC%9D%B4%EB%93%9C.md
 
 ###### 2. 설치 시, 옵션으로 설치 경로만 지정한다. 다른 옵션에 대해서는 사용자가 환경에 맞게 설정한다.
 
@@ -193,8 +194,6 @@ unixODBC 연동은 https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master
 ###### [ 테스트 환경 ]
 
 ###### 1. centos 계정에 jruby 를 설치하며, 계정은 Goldilocks 에 접속할 수 있어야 한다.
-
-###### 2. 설치 시, 옵션으로 설치 경로만 지정한다. 다른 옵션에 대해서는 사용자가 환경에 맞게 설정한다.
 
 <h6>
 
