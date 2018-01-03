@@ -138,7 +138,7 @@
 
 ###### 4. ext 경로로 들어간다.
 
-###### 5. --with-odbc-dir 옵션을 사용하여 설치 경로를 지정한다. 이 때 옵션 값으로 unixODBC HOME PATH 를 작성한다.
+###### 5. --with-odbc-dir 옵션을 사용하며, 옵션 값으로 unixODBC HOME PATH 를 작성한다.
 
 
 <h6>
