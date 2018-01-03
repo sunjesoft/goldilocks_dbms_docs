@@ -214,7 +214,7 @@
     DATABASE    : Goldilocks 3.1.1 r23756
     Java        : 1.8.0_144
 
-    jruby        : ruby 2.5.0p0 (2017-12-25 revision 61468) [x86_64-linux]
+    jruby       : jruby 9.1.15.0 (2.3.3)
 
 </h6>
 
@@ -291,7 +291,7 @@
 
 <h6>
 
-    $ cp $GOLDILOCKS_HOME/lib/goldiocks6.jar $JRUBY_HOME/lib/
+    $ cp $GOLDILOCKS_HOME/lib/goldilocks6.jar $JRUBY_HOME/lib/
 
 </h6>
 
