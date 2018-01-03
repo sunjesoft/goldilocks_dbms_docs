@@ -159,6 +159,20 @@
 
 ###### 1. odbc.ini 에 등록된 DSN 을 이용하여 Goldilocks 에 접속한다.
 
+<h6>
+
+    $ cat /home/centos/.odbc.ini
+    [ODBC Data Sources]
+    GoldilocksODBC = Goldilocks ODBC Driver
+
+    [GoldilocksODBC]
+    DRIVER = /home/centos/goldilocks_home/lib/libgoldilockscs-ul64.so
+    HOST=192.168.0.50
+    PORT=22581
+
+</h6>
+
+
 ###### 2. 테스트 소스를 작성한 뒤 수행한다.
 
 <h6>
