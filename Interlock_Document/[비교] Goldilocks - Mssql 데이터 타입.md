@@ -13,6 +13,8 @@
 
 ## 2. 숫자 타입
 
+<h6>
+
 | Mssql | 최소 값 | 최대 값 | Goldilocks | 최솟값 | 최댓값 | 비고 |
 |:--     |:--      |:--      |:--         |:--      |:--      |:-- |
 | BIT | 0 | 1 | NUMBER(1, 0) | -9 | 9 | |
@@ -27,8 +29,11 @@
 | FLOAT | | | NATIVE_DOUBLE | | |
 | REAL | | | NATIVE_REAL | | |
 
+</h6>
 
 ## 3. 문자 타입
+
+<h6>
 
 | Mssql | 최소 값 | 최대 값 | Goldilocks | 최소 값 | 최대 값 | 비고 |
 |:--     |:--      |:--      |:--         |:--      |:--      |:--   |
@@ -42,8 +47,11 @@
 | VARBINARY(n) | | 8000 byte | VARBINARY(n) | | 4000 byte | 4000 byte 초과 LONG VARBINARY |
 | IMAGE | | 2G byte | LONG VARBINARY | | 100M byte | |
 
+</h6>
 
 ## 4. 날짜&시간 타입
+
+<h6>
 
 | Mssql | 최소 값 | 최대 값 | Goldilocks | 최소 값 | 최대 값 | 비고 |
 |:--    |:--      |:--      |:--         |:--      |:--      |:--   |
@@ -52,3 +60,5 @@
 | SMALLDATETIME | 1900-01-01 00:00:00 | 2079-06-06 23:59:59 | DATE | 4714-11-24 00:00:00 BC | 9999-12-31  23:59:59 AD | YYYY-MM-DD HH24:MI:SS |
 | DATETIME | 1753-01-01 00:00:00.000 | 9999-12-31 23:59:59.999 | TIMESTAMP | 4714-11-24 BC | 9999-12-31 AD | YYYY-MM-DD HH24:MI:SS.FF6 |
 | DATETIME2(n) | 0001-01-01 00:00:00.0000000 | 9999-12-31 23:59:59.999 | TIMESTAMP | 4714-11-24 BC | 9999-12-31 AD | YYYY-MM-DD HH24:MI:SS.FF6 |
+
+</h6>
