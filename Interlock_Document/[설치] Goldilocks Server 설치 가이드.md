@@ -203,9 +203,9 @@
     $ . ~/.bash_profile
 
     $ echo $GOLDILOCKS_HOME
-    /home/sundb/goldilocks_home
+    /home/sunje/goldilocks_home
     $ echo $GOLDILOCKS_DATA
-    /home/sundb/goldilocks_data
+    /home/sunje/goldilocks_data
 
     $ vi ~/.odbc.ini
     [GOLDILOCKS]
