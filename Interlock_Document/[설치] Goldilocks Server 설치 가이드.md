@@ -196,6 +196,9 @@
     export GOLDILOCKS_DATA=$HOME/goldilocks_data
     export PATH=$GOLDILOCKS_HOME/bin:$PATH
     export LD_LIBRARY_PATH=$GOLDILOCKS_HOME/lib:$LD_LIBRARY_PATH
+    ulimit -n 4096
+    ulimit -u 4096
+
 
     $ . ~/.bash_profile
 
