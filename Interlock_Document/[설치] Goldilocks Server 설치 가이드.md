@@ -79,18 +79,6 @@
 
 </h6>
 
-###### [AIX]
-
-<h6>
-
-
-</h6>
-
-###### [HP-UX]
-
-<h6>
-
-</h6>
 
 ## 3. Goldilocks 사용자 계정 생성
 
@@ -100,15 +88,15 @@
 
 <h6>
 
-    USER  : sundb
-    HOME  : /home/sundb
+    USER  : sunje
+    HOME  : /home/sunje
     SHELL : bash
 
 </h6>
 
 <h6>
 
-    # useradd -d /home/sundb -s /bin/bash sundb
+    # useradd -d /home/sunje -s /bin/bash sunje
 
 </h6>
 
@@ -116,7 +104,7 @@
 
 <h6>
 
-    # passwd sundb
+    # passwd sunje
 
 </h6>
 
@@ -124,7 +112,7 @@
 
 <h6>
 
-    # su - sundb
+    # su - sunje
 
 </h6>
 
@@ -177,8 +165,9 @@
 
 <h6>
 
-    $ ln -s goldilocks-server-venus.3.1.1-linux-x86_64/goldilocks_home/ /home/sundb/goldilocks_home
-    $ ln -s goldilocks-server-venus.3.1.1-linux-x86_64/goldilocks_data/ /home/sundb/goldilocks_data
+    $ cd $HOME
+    $ ln -s goldilocks-server-venus.3.1.1-linux-x86_64/goldilocks_home/ goldilocks_home
+    $ ln -s goldilocks-server-venus.3.1.1-linux-x86_64/goldilocks_data/ goldilocks_data
 
 </h6>
 
@@ -190,7 +179,7 @@
 
 <h6>
 
-    $ cp license /home/sundb/goldilocks_home/license/license
+    $ cp license /home/sunje/goldilocks_home/license/license
 
 </h6>
 
