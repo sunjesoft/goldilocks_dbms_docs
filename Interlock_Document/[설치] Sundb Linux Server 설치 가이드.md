@@ -273,9 +273,9 @@
 
 <h6>
 
-    $ gsql --as sysdba $SUNDB_HOME/admin/DictionarySchema.sql
-    $ gsql --as sysdba $SUNDB_HOME/admin/InformationSchema.sql
-    $ gsql --as sysdba $SUNDB_HOME/admin/PerformanceViewSchema.sql
+    $ gsql --as sysdba -i $SUNDB_HOME/admin/DictionarySchema.sql
+    $ gsql --as sysdba -i $SUNDB_HOME/admin/InformationSchema.sql
+    $ gsql --as sysdba -i $SUNDB_HOME/admin/PerformanceViewSchema.sql
 
 </h6>
 

@@ -325,9 +325,9 @@
 
 <h6>
 
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/standalone/DictionarySchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/standalone/InformationSchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/standalone/PerformanceViewSchema.sql
+    $ gsql sys gliese --as sysdba -i $GOLDILOCKS_HOME/admin/standalone/DictionarySchema.sql
+    $ gsql sys gliese --as sysdba -i $GOLDILOCKS_HOME/admin/standalone/InformationSchema.sql
+    $ gsql sys gliese --as sysdba -i $GOLDILOCKS_HOME/admin/standalone/PerformanceViewSchema.sql
 
 </h6>
 
@@ -337,9 +337,9 @@
 
     # 최초 마스터 노드에 대해서 한번만 수행하면 된다.
 
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/cluster/DictionarySchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/cluster/InformationSchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/cluster/PerformanceViewSchema.sql
+    $ gsql sys gliese --as sysdba -i $GOLDILOCKS_HOME/admin/cluster/DictionarySchema.sql
+    $ gsql sys gliese --as sysdba -i $GOLDILOCKS_HOME/admin/cluster/InformationSchema.sql
+    $ gsql sys gliese --as sysdba -i $GOLDILOCKS_HOME/admin/cluster/PerformanceViewSchema.sql
 
 </h6>
 
