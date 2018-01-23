@@ -1,29 +1,27 @@
-# Goldilocks Server 설치 가이드
+# Sundb Linux Server 설치 가이드
 
 ## 1. 개요
 
-#### 1 - 1. GOLDILOCKS 를 LINUX, AIX, HP-UX 환경에서 설치하는 방법을 설명한다.
+#### 1 - 1. SUNDB 를 LINUX 환경에서 설치하는 방법을 설명한다.
 
 #### 1 - 2. 연동을 위한 환경 구축은 사용자가 해야 할 사항이며, 선재소프트는 이 부분에 대한 기술지원을 진행하지 않는다.
 
-#### 1 - 3. GOLDILOCKS 를 구동하기 위한 운영체제 별 최소 커널 값은 다음과 같다.
+#### 1 - 3. SUNDB 를 구동하기 위한 운영체제 별 최소 커널 값은 다음과 같다.
 
 <h6>
 
 | 운영체제 | 커널   |
 |:--       |:--     |
 | LINUX    | 2.6.32 |
-| AIX      | 6.1    |
-| HP-UX    | 11.31  |
 
 </h6>
 
-#### 1 - 4. GOLDILOCKS 를 운영하기 위해 최소 2GB 이상의 메모리와 디스크 여유분이 있어야 한다.
+#### 1 - 4. SUNDB 를 운영하기 위해 최소 2GB 이상의 메모리와 디스크 여유분이 있어야 한다.
 
 
 ## 2. 커널 값 설정
 
-#### 2 - 1. GOLDILOCKS 와 관련하여 지정하는 커널 값에 대한 설명이다.
+#### 2 - 1. SUNDB 와 관련하여 지정하는 커널 값에 대한 설명이다.
 
 ###### 공유메모리
 
@@ -80,7 +78,7 @@
 </h6>
 
 
-## 3. Goldilocks 사용자 계정 생성
+## 3. SUNDB 사용자 계정 생성
 
 #### 3 - 1. 사용자 계정을 생성한다.
 
@@ -118,19 +116,19 @@
 
 ## 4. 데이터베이스 설치
 
-###### goldilocks server package 가 없는 경우 technet@sunjesoft.com 에 요청한다.
+###### Sundb server package 가 없는 경우 technet@sunjesoft.com 에 요청한다.
 
-#### 4 - 1. goldilocks-server-[version]-[os]-[bit].tar.gz 파일을 압축 해제한다.
+#### 4 - 1. sundb-server-[version]-[os]-[bit].tar.gz 파일을 압축 해제한다.
 
 <h6>
 
-    $ tar xzf goldilocks-server-*.tar.gz
+    $ tar xzf sundb-server-*.tar.gz
 
 </h6>
 
-#### 4 - 2. 압축 파일을 풀면 패키지명 폴더 아래 goldilocks_home, goldilocks_data 가 생성된다.
+#### 4 - 2. 압축 파일을 풀면 패키지명 폴더 아래 sundb_home, sundb_data 가 생성된다.
 
-###### [goldilocks_home]
+###### [sundb_home]
 
 <h6>
 
@@ -139,14 +137,14 @@
 | bin | 바이너리 폴더 |
 | lib | 라이브러리 폴더 |
 | include | 헤더파일 폴더 |
-| sample | Goldilocks 에 적용 가능한 예제 폴더 (ODBC, JDBC, Embedded-SQL, SQL 포함) |
+| sample | SUNDB 에 적용 가능한 예제 폴더 (ODBC, JDBC, Embedded-SQL, SQL 포함) |
 | admin | 데이터베이스 딕셔너리 폴더 |
 | license | 라이센스 폴더 |
 | msg | 에러메세지 폴더 |
 
 </h6>
 
-###### [goldilocks_data]
+###### [sundb_data]
 
 <h6>
 
@@ -166,8 +164,8 @@
 <h6>
 
     $ cd $HOME
-    $ ln -s goldilocks-server-venus.3.1.1-linux-x86_64/goldilocks_home/ goldilocks_home
-    $ ln -s goldilocks-server-venus.3.1.1-linux-x86_64/goldilocks_data/ goldilocks_data
+    $ ln -s sundb-server-venus.3.1.1-linux-x86_64/sundb_home/ sundb_home
+    $ ln -s sundb-server-venus.3.1.1-linux-x86_64/sundb_data/ sundb_data
 
 </h6>
 
@@ -175,40 +173,40 @@
 
 ###### license 가 없는 경우 technet@sunjesoft.com 에 요청한다.
 
-###### goldilocks_home/license 폴더에 license 파일로 저장한다.
+###### sundb_home/license 폴더에 license 파일로 저장한다.
 
 <h6>
 
-    $ cp license /home/sunje/goldilocks_home/license/license
+    $ cp license /home/sunje/sundb_home/license/license
 
 </h6>
 
 ## 5. 사용자 환경설정
 
-#### 5 - 1. 사용자 환경파일에 GOLDILOCKS 환경변수를 등록 및 적용한다.
+#### 5 - 1. 사용자 환경파일에 SUNDB 환경변수를 등록 및 적용한다.
 
 ###### 환경파일은 SHELL 에 따라 달라질 수 있다.
 
 <h6>
 
     $ vi ~/.bash_profile
-    export GOLDILOCKS_HOME=$HOME/goldilocks_home
-    export GOLDILOCKS_DATA=$HOME/goldilocks_data
-    export PATH=$GOLDILOCKS_HOME/bin:$PATH
-    export LD_LIBRARY_PATH=$GOLDILOCKS_HOME/lib:$LD_LIBRARY_PATH
+    export SUNDB_HOME=$HOME/sundb_home
+    export SUNDB_DATA=$HOME/sundb_data
+    export PATH=$SUNDB_HOME/bin:$PATH
+    export LD_LIBRARY_PATH=$SUNDB_HOME/lib:$LD_LIBRARY_PATH
     ulimit -n 4096
     ulimit -u 4096
 
 
     $ . ~/.bash_profile
 
-    $ echo $GOLDILOCKS_HOME
-    /home/sunje/goldilocks_home
-    $ echo $GOLDILOCKS_DATA
-    /home/sunje/goldilocks_data
+    $ echo $SUNDB_HOME
+    /home/sunje/sundb_home
+    $ echo $SUNDB_DATA
+    /home/sunje/sundb_data
 
     $ vi ~/.odbc.ini
-    [GOLDILOCKS]
+    [SUNDB]
     HOST=127.0.0.1
     PORT=22581
 
@@ -241,23 +239,17 @@
 
 | 옵션 | 설명 | 기본값 |
 |:--   |:--   |:--     |
-| db_name | 데이터베이스 명 | goldilocks |
-| db_comment | 데이터베이스에 대한 설명 | goldilocks database |
+| db_name | 데이터베이스 명 | SUNDB |
+| db_comment | 데이터베이스에 대한 설명 | SUNDB database |
 | timezone | 타임존 | +09:00 |
 | character_set | 데이터베이스 인코딩 | UTF8 |
 | char_length_unit | 문자 저장 단위 | OCTETS |
-| home | goldilocks.properties.conf 파일 | $GOLDILOCKS_DATA/conf/goldilocks.properties.conf |
-| cluster | 데이터베이스를 클러스터 모드로 변경 | 옵션 미 부여 시, STAND ALONE|
-| member | 클러스터 모드 시 멤버 명 | G1N1 |
-| port | 클러스터 모드 시 포트 | 10101 |
-| host | 클러스터 모드 시 아이피 | 127.0.0.1 |
+| home | SUNDB.properties.conf 파일 | $SUNDB_DATA/conf/SUNDB.properties.conf |
 
 </h6>
 
 
 #### 6 - 4. 데이터베이스를 생성한다.
-
-###### [STAND ALONE 모드]
 
 <h6>
 
@@ -265,83 +257,26 @@
 
 </h6>
 
-###### [CLUSTER 모드]
-
-<h6>
-
-    $ gcreatedb --cluster
-
-</h6>
-
 #### 6 - 5. 데이터베이스를 구동한다.
 
-###### [STAND ALONE 모드]
-
 <h6>
 
-    $ gsql sys gliese --as sysdba
+    $ gsql --as sysdba
     gSQL> STARTUP
 
 </h6>
 
-###### [CLUSTER 모드]
-
-<h6>
-
-    $ gsql sys gliese --as sysdba
-    gSQL> STARTUP
-    gSQL> ALTER SYSTEM OPEN GLOBAL DATABASE;
-
-</h6>
-
-###### 데이터베이스가 마스터 노드인 경우
-
-<h6>
-
-    쿼리> CREATE CLUSTER GROUP <그룹 명> CLUSTER MEMBER <멤버 명> HOST <서버 아이피> PORT <클러스터 포트>;
-    gSQL> CREATE CLUSTER GROUP G1 CLUSTER MEMBER G1N1 HOST '192.168.0.50' PORT 10101;
-
-</h6>
-
-###### 데이터베이스가 슬레이브 노드인 경우
-
-<h6>
-
-    # 쿼리를 마스터 노드에서 수행한다.
-
-    # 새로운 그룹을 추가하는 경우
-    쿼리> CREATE CLUSTER GROUP <그룹 명> CLUSTER MEMBER <멤버 명> HOST <서버 아이피> PORT <클러스터 포트>;
-    gSQL> CREATE CLUSTER GROUP G2 CLUSTER MEMBER G1N1 HOST '192.168.0.50' PORT 10101;
-
-    # 기존 그룹에 멤버를 추가하는 경우
-    쿼리> ALTER CLUSTER GROUP <그룹 명> ADD CLUSTER MEMBER <멤버 명> HOST <서버 아이피> PORT <클러스터 포트>;
-    gSQL> ALTER CLUSTER GROUP G1 ADD CLUSTER MEMBER G1N1 HOST '192.168.0.50' PORT 10101;
-
-</h6>
 
 #### 6 - 6. 데이터베이스 스키마를 구축한다.
 
-###### [STAND ALONE 모드]
-
 <h6>
 
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/standalone/DictionarySchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/standalone/InformationSchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/standalone/PerformanceViewSchema.sql
+    $ gsql --as sysdba $SUNDB_HOME/admin/DictionarySchema.sql
+    $ gsql --as sysdba $SUNDB_HOME/admin/InformationSchema.sql
+    $ gsql --as sysdba $SUNDB_HOME/admin/PerformanceViewSchema.sql
 
 </h6>
 
-###### [CLUSTER 모드]
-
-<h6>
-
-    # 최초 마스터 노드에 대해서 한번만 수행하면 된다.
-
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/cluster/DictionarySchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/cluster/InformationSchema.sql
-    $ gsql sys gliese --as sysdba $GOLDILOCKS_HOME/admin/cluster/PerformanceViewSchema.sql
-
-</h6>
 
 ## 7. 리스너 구동
 
