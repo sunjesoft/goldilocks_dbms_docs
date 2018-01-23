@@ -164,8 +164,8 @@
 <h6>
 
     $ cd $HOME
-    $ ln -s sundb-server-venus.3.1.1-linux-x86_64/sundb_home/ sundb_home
-    $ ln -s sundb-server-venus.3.1.1-linux-x86_64/sundb_data/ sundb_data
+    $ ln -s sundb-server-mercury.2.3.42-linux-x86_64/sundb_home/ sundb_home
+    $ ln -s sundb-server-mercury.2.3.42-linux-x86_64/sundb_data/ sundb_data
 
 </h6>
 
@@ -244,12 +244,13 @@
 | timezone | 타임존 | +09:00 |
 | character_set | 데이터베이스 인코딩 | UTF8 |
 | char_length_unit | 문자 저장 단위 | OCTETS |
-| home | SUNDB.properties.conf 파일 | $SUNDB_DATA/conf/SUNDB.properties.conf |
 
 </h6>
 
 
 #### 6 - 4. 데이터베이스를 생성한다.
+
+###### 생성 전 $SUNDB_DATA/conf/sundb.properties.conf 파일에서 환경에 맞게 프로퍼티를 변경한다.
 
 <h6>
 
@@ -262,7 +263,8 @@
 <h6>
 
     $ gsql --as sysdba
-    gSQL> STARTUP
+    gSQL> \STARTUP
+    gSQL> \quit
 
 </h6>
 

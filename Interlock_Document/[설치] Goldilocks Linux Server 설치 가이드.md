@@ -255,6 +255,8 @@
 
 #### 6 - 4. 데이터베이스를 생성한다.
 
+###### 생성 전 $GOLDILOCKS_DATA/conf/goldilocks.properties.conf 파일에서 환경에 맞게 프로퍼티를 변경한다.
+
 ###### [STAND ALONE 모드]
 
 <h6>
