@@ -2,9 +2,12 @@
 
 ## 1. 개요
 
-#### 1 - 1. GOLDILOCKS JDBC DRIVER 를 이용하여 DBeaver 과 연동하는 방법을 설명한다.
+#### 1 - 1. GOLDILOCKS ODBC DRIVER 를 이용하여 DBeaver 과 연동하는 방법을 설명한다.
 
 #### 1 - 2. 이 문서는 https://dbeaver.jkiss.org/ 에서 제공하는 툴을 기준으로 설명한다.
+
+#### 1 - 3. Goldilocks Windows Client 가 설치되지 않은 경우, 다음 url 을 참고하여 설치를 진행한다.<br/>
+https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Interlock_Document/%5B%EC%84%A4%EC%B9%98%5D%20Goldilocks%20Windows%20Client%20%EA%B0%80%EC%9D%B4%EB%93%9C.md
 
 ###### [ 테스트 환경 ]
 
@@ -15,7 +18,7 @@
     JDBC DRIVER : goldilocks6.jar
 
     CLIENT OS       : WINDOWS 7
-    JAVA            : 1.8.0_131
+    CLIENT DATABASE : GOLDILOCKS 3.1.4 win32
     DBeaver         : 4.3.3.1
 
 </h6>
@@ -48,62 +51,28 @@
 
 ![dbeaver_03](https://user-images.githubusercontent.com/9734988/35428849-9e3ea26c-02b4-11e8-9a08-d4505856536e.jpg)
 
-#### 4 - 3. Edit Driver Settings 를 클릭한다.
-
-#### 4 - 4. Edit Driver "ODBC" 란에 값을 기입한다.
+#### 4 - 3. General 에 값을 기입 후, Test Connection 을 클릭한다.
 
 ###### [ 기입 값 ]
 
 <h6>
 
-    Driver Name  : GOLDILOCKS 를 입력한다.
-    Class Name   : GOLDILOCKS JDBC DRIVER NAME 을 입력한다.
-                   GOLDILOCKS JDBC DRIVER NAME 은 sunje.goldilocks.jdbc.GoldilocksDriver 이다.
-    URL Template : GOLDILOCKS JDBC URL 을 입력한다.
-                   GOLDILOCKS JDBC URL 은 jdbc:goldilocks://Server IP:Listener Port/DBName 로 구성된다.
-                     DBName 은 아무 문자열이나 입력하면 되나 null 은 허용하지 않는다.
-                     예) SERVER IP 가 192.168.0.50 이고 Listener Port 가 22581 인 경우 URL 구성
-                      jdbc:goldilocks://192.168.0.50:22581/test
-    Default Port : Listener Port 를 입력한다.
-
-    ADD Folder 를 누른 뒤 goldilocks6.jar 파일을 등록한다.
-    Find Class 를 누른 뒤 sunje.goldilocks.jdbc.GoldilocksDriver 를 선택한다.
+    Database/Schema : odbc 관리자에 등록된 GOLDILOCKS 명을 입력한다.
+    User name       : 데이터베이스 계정 아이디를 입력한다.
+    Password        : 데이터베이스 계정 비밀번호를 입력한다.
 
 </h6>
 
-![dbeaver_04](https://user-images.githubusercontent.com/9734988/35428856-a1ff098c-02b4-11e8-8fcf-382b3dac3af0.jpg)
+![dbeaver_04](https://user-images.githubusercontent.com/9734988/35545407-558a423c-05b2-11e8-990e-390c54fdc9c4.jpg)
 
-<h6>
+#### 4 - 4. Driver settings 창에서 Download 를 클릭하여 필요한 파일을 다운로드한다. 다운로드 후 연결에 성공하면 Connected 라는 팝업창이 뜬다.
 
-    Download/Update 버튼을 누른 뒤, Force Download / overwrite 에 체크 한 후, Download 를 진행한다.
+![dbeaver_05](https://user-images.githubusercontent.com/9734988/35545412-58333980-05b2-11e8-8e54-20073424aec9.jpg)
 
-</h6>
+#### 4 - 5. Next 와 Finish 를 눌러 연동을 진행한다.
 
-![dbeaver_05](https://user-images.githubusercontent.com/9734988/35428860-a5218dec-02b4-11e8-8d92-172efdd902b5.jpg)
+![dbeaver_06](https://user-images.githubusercontent.com/9734988/35545414-59d0799c-05b2-11e8-984e-d8c34d88a389.jpg)
 
+#### 4 - 6. 쿼리를 입력 및 수행하여 데이터를 조회한다.
 
-#### 4 - 5. Test Connection 버튼을 클릭하여 접속이 성공하는지 확인한다.
-
-###### 버그성으로 JDBC URl 이 자동으로 잡히지 않는 경우 Test Connection 버튼을 클릭하면 잡아준다.
-
-###### [ 기입 값 ]
-
-<h6>
-
-    User name : Database 계정 아이디를 입력한다.
-    Password  : Database 계정 비밀번호를 입력한다.
-
-</h6>
-
-![dbeaver_06](https://user-images.githubusercontent.com/9734988/35428866-a869d982-02b4-11e8-8bba-6f362dbfd3c9.jpg)
-
-#### 4 - 6. 성공하는 경우 다음단계를 진행하여 Finish 까지 진행한다.
-
-![dbeaver_07](https://user-images.githubusercontent.com/9734988/35428868-ab2050d4-02b4-11e8-84d8-22f0fd9e9311.jpg)
-
-
-## 6. GOLDILOCKS 쿼리 수행
-
-#### 6 - 1. 쿼리를 입력한 뒤 수행하여 결과를 받아온다.
-
-![dbeaver_08](https://user-images.githubusercontent.com/9734988/35428870-b048f69c-02b4-11e8-9b11-c4af58dbda60.jpg)
+![dbeaver_07](https://user-images.githubusercontent.com/9734988/35545585-1ed977a2-05b3-11e8-80c9-c7daf6bb31a7.jpg)
