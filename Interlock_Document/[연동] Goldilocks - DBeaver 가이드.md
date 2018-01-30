@@ -7,7 +7,7 @@
 #### 1 - 2. 이 문서는 https://dbeaver.jkiss.org/ 에서 제공하는 툴을 기준으로 설명한다.
 
 #### 1 - 3. Goldilocks Windows Client 가 설치되지 않은 경우, 다음 url 을 참고하여 설치를 진행한다.<br/>
-https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Interlock_Document/%5B%EC%84%A4%EC%B9%98%5D%20Goldilocks%20Windows%20Client%20%EA%B0%80%EC%9D%B4%EB%93%9C.md
+###### https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Interlock_Document/%5B%EC%84%A4%EC%B9%98%5D%20Goldilocks%20Windows%20Client%20%EA%B0%80%EC%9D%B4%EB%93%9C.md
 
 ###### [ 테스트 환경 ]
 
@@ -57,15 +57,15 @@ https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Interlock_Document
 
 <h6>
 
-    Database/Schema : odbc 관리자에 등록된 GOLDILOCKS 명을 입력한다.
-    User name       : 데이터베이스 계정 아이디를 입력한다.
-    Password        : 데이터베이스 계정 비밀번호를 입력한다.
+    Database/Schema : ODBC 데이터 원본 관리자에 등록된 GOLDILOCKS 명을 입력한다.
+    User name       : GOLDILOCKS 아이디를 입력한다.
+    Password        : GOLDILOCKS 비밀번호를 입력한다.
 
 </h6>
 
 ![dbeaver_04](https://user-images.githubusercontent.com/9734988/35545407-558a423c-05b2-11e8-990e-390c54fdc9c4.jpg)
 
-#### 4 - 4. Driver settings 창에서 Download 를 클릭하여 필요한 파일을 다운로드한다. 다운로드 후 연결에 성공하면 Connected 라는 팝업창이 뜬다.
+#### 4 - 4. Driver settings 창에서 Download 를 클릭하여 필요한 파일을 다운로드한다. 연결에 성공하면 Connected 라는 팝업창이 뜬다.
 
 ![dbeaver_05](https://user-images.githubusercontent.com/9734988/35545412-58333980-05b2-11e8-8e54-20073424aec9.jpg)
 
