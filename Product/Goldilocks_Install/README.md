@@ -1,3 +1,3 @@
 # Goldilocks_Install
 
-This folder include [Goldilocks Install Server and Client] and [Administration Tools] by provided Sunjesoft.
+This folder contains [Goldilocks Install Server and Client] and [Administration Tools] developed by Sunjesoft.
