@@ -26,7 +26,7 @@
 
  </h6>
 
- #### 2. 증분백업 ( 온라인 백업 )
+ ## 2. 증분백업 ( 온라인 백업 )
 
  ###### [Step 1]. 증분백업을 이용하여 데이터베이스를 백업받는다. 처음은 LEVEL 0 으로 진행한다.
  ###### [Step 2]. LEVEL 0 이후의 변경된 데이터만 하고싶은경우, LEVEL 의 단계를 높이며 진행한다. LEVEL 단계는 총 0 ~ 4 단계가 제공된다.
@@ -213,7 +213,7 @@
     gSQL> ALTER SYSTEM MOUNT DATABASE;
     gSQL> ALTER DATABASE BEGIN INCOMPLETE RECOVERY;
     gSQL> ALTER DATABASE RECOVER AUTOMATICALLY;
-    gSQL> ALTER DATABASE RECOVER '/home/sh91/GOLDILOCKS_data/wal/redo_2_0.log'
+    gSQL> ALTER DATABASE RECOVER '/home/sh91/GOLDILOCKS_data/wal/redo_2_0.log';
           --> 위 단계 생략시 current 로그 파일의 데이터 유실
     gSQL> ALTER DATABASE END INCOMPLETE RECOVERY;
     gSQL> ALTER SYSTEM OPEN DATABASE RESETLOGS;
@@ -426,7 +426,7 @@
     gSQL> ALTER DATABASE RESTORE;
     gSQL> ALTER DATABASE BEGIN INCOMPLETE RECOVERY;
     gSQL> ALTER DATABASE RECOVER AUTOMATICALLY;
-    gSQL> ALTER DATABASE RECOVER '/home/sh91/GOLDILOCKS_data/wal/redo_2_0.log'
+    gSQL> ALTER DATABASE RECOVER '/home/sh91/GOLDILOCKS_data/wal/redo_2_0.log';
           --> 위 단계 생략시 current 로그 파일의 데이터 유실
     gSQL> ALTER DATABASE END INCOMPLETE RECOVERY;
     gSQL> ALTER SYSTEM OPEN DATABASE RESETLOGS;
@@ -843,7 +843,7 @@
 
     C1 C2         C3
     -- ---------- -----------------------
-     1 2017-07-21 INCREMENTAL BACKUP TEST
-     2 2017-07-21 INCREMENTAL BACKUP TEST
+     1 2018-02-10 INCREMENTAL BACKUP TEST
+     2 2018-02-10 INCREMENTAL BACKUP TEST
 
 </h6>
