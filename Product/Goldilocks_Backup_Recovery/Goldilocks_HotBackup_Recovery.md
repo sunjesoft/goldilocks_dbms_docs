@@ -1,46 +1,49 @@
-# 콜드백업, 시나리오별 복구 방법
+# 핫백업, 시나리오별 복구 방법
 
 ## 1. 서론
 
 #### 1 - 1. 테스트 환경
 
+ <h6>
+
+ 1. 운영체제 버전　　　CentOS 7
+ 2. 커널 버전　　　　　3.10.0-327.el7.x86_64
+ 3. 데이터베이스 버전　3.1.7
+ 4. 기본 설치　　　　　프로퍼티 변경 X ( 아카이브 모드 예외 )
+ 5. 모든 리눅스 명령어는 goldilocks_data 경로에서 실행
+
+ </h6>
+
+ #### 1 - 2. 시작하기 앞서
+
+ <h6>
+
+ 1. CURRENT 리두 로그 파일이 유실된 경우, CURRENT 리두 로그 파일에 있던 데이터는 복구가 불가능하다.
+ 2. 백업된 파일의 마지막 LSN 은, 아카이브 혹은 리두 로그 파일 내에 있어야 한다.
+ 3. UNTIL CHANGE 복구가 가능은 하지만, 특정 데이터까지의 복구를 위한 LSN 의 데이터 값 확인은 복잡한 방법이므로 권고하지 않는다.
+ 4. UNTIL CHANGE 복구시 리두 로그 파일에 COMMIT 되지 않은 LSN 이 있더라도, 이 LSN 값에 대해서는 복구가 불가능하다.
+ 5. 아카이브 로그 파일이 존재하지 않은 상황에서, 리두로그 파일을 모두 유실하는 경우 복구가 불가능하다.
+
+ </h6>
+
+ ## 2. 핫백업 ( 온라인 백업 )
+
+ ###### [Step 1]. 데이터베이스를 백업모드로 변경한다.
+ ###### [Step 2]. log, wal, dbf 파일을 백업경로로 물리적으로 복사한다.
+ ###### [Step 3]. 데이터베이스의 백업모드를 종료한다.
+
 <h6>
 
-1. 운영체제 버전　　　CentOS 7
-2. 커널 버전　　　　　3.10.0-327.el7.x86_64
-3. 데이터베이스 버전　3.1.7
-4. 기본 설치　　　　　프로퍼티 변경 X ( 아카이브 모드 예외 )
-5. 모든 리눅스 명령어는 goldilocks_data 경로에서 실행
-
-</h6>
-
-#### 1 - 2. 시작하기 앞서
-
-<h6>
-
-1. CURRENT 리두 로그 파일이 유실된 경우, CURRENT 리두 로그 파일에 있던 데이터는 복구가 불가능하다.
-2. 백업된 파일의 마지막 LSN 은, 아카이브 혹은 리두 로그 파일 내에 있어야 한다.
-3. UNTIL CHANGE 복구가 가능은 하지만, 특정 데이터까지의 복구를 위한 LSN 의 데이터 값 확인은 복잡한 방법이므로 권고하지 않는다.
-4. UNTIL CHANGE 복구시 리두 로그 파일에 COMMIT 되지 않은 LSN 이 있더라도, 이 LSN 값에 대해서는 복구가 불가능하다.
-5. 아카이브 로그 파일이 존재하지 않은 상황에서, 리두로그 파일을 모두 유실하는 경우 복구가 불가능하다.
-
-</h6>
-
-## 2. 콜드백업 (오프라인 백업)
-
-###### [Step 1]. 데이터베이스를 종료한다.
-###### [Step 2]. log, wal, dbf 파일을 백업경로로 물리적으로 복사한다.
-
-<h6>
-
-     gSQL> SHUTDOWN IMMEDIATE
+     gSQL> ALTER DATABASE BEGIN BACKUP;
 
      $ cp db/* wal/*                    backup/       (필수)
      $ cp conf/* archive_log/* trc/*    backup/       (선택)
 
+     gSQL> ALTER DATABASE END BACKUP;
+
 </h6>
 
-## 3. 콜드백업(오프라인 백업)을 이용한 시나리오별 복구 방법
+## 3. 핫백업(온라인 백업)을 이용한 시나리오별 복구 방법
 
 #### Scenario 3 - 1. 데이터 파일을 유실한 경우
 
@@ -56,7 +59,8 @@
 
 #### Scenario 3 - 7. 모든 파일을 유실한 경우
 
-## 3. 콜드백업( 오프라인 백업 )을 이용한 시나리오별 복구 방법
+
+## 3. 핫백업(온라인 백업)을 이용한 시나리오별 복구 방법
 
 #### Scenario 3 - 1. 데이터 파일을 유실한 경우
 
@@ -64,19 +68,24 @@
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
+    gSQL> ALTER DATABASE BEGIN BACKUP;
 
-    gSQL> SHUTDOWN IMMEDIATE
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -84,9 +93,6 @@
 
 <h6>
 
-    gSQL> STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -95,9 +101,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -143,13 +149,13 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
-     3 2018-02-10 COLD BACKUP TEST
+    -- ---------- ---------------
+     1 2017-07-21 HOT BACKUP TEST
+     2 2017-07-21 HOT BACKUP TEST
+     3 2017-07-21 HOT BACKUP TEST
 
 </h6>
 
@@ -160,19 +166,25 @@
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
 
-    gSQL> SHUTDOWN IMMEDIATE
+    gSQL> ALTER DATABASE BEGIN BACKUP;
+
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -180,9 +192,6 @@
 
 <h6>
 
-    gSQL> STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -191,9 +200,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -241,15 +250,16 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
-     3 2018-02-10 COLD BACKUP TEST
+    -- ---------- ---------------
+     1 2017-07-21 HOT BACKUP TEST
+     2 2017-07-21 HOT BACKUP TEST
+     3 2017-07-21 HOT BACKUP TEST
 
 </h6>
+
 
 #### Scenario 3 - 3. 리두 로그 파일을 유실한 경우
 
@@ -257,19 +267,25 @@
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
 
-    gSQL> SHUTDOWN IMMEDIATE
+    gSQL> ALTER DATABASE BEGIN BACKUP;
+
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -277,9 +293,6 @@
 
 <h6>
 
-    gSQL> \STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -288,9 +301,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -364,14 +377,15 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
+    -- ---------- ---------------
+     1 2017-07-21 HOT BACKUP TEST
+     2 2017-07-21 HOT BACKUP TEST
 
 </h6>
+
 
 #### Scenario 3 - 4. 컨트롤 파일과 데이터 파일을 유실한 경우
 
@@ -379,19 +393,25 @@
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
 
-    gSQL> SHUTDOWN IMMEDIATE
+    gSQL> ALTER DATABASE BEGIN BACKUP;
+
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -399,9 +419,6 @@
 
 <h6>
 
-    gSQL> STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -410,9 +427,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -466,15 +483,16 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
-     3 2018-02-10 COLD BACKUP TEST
+    -- ---------- ---------------
+     1 2018-02-10 HOT BACKUP TEST
+     2 2018-02-10 HOT BACKUP TEST
+     3 2018-02-10 HOT BACKUP TEST
 
 </h6>
+
 
 #### Scenario 3 - 5. 컨트롤 파일과 리두 로그 파일을 유실한 경우
 
@@ -482,19 +500,25 @@
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
 
-    gSQL> SHUTDOWN IMMEDIATE
+    gSQL> ALTER DATABASE BEGIN BACKUP;
+
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -502,9 +526,6 @@
 
 <h6>
 
-    gSQL> STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -513,9 +534,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -584,7 +605,7 @@
 
 <h6>
 
-    gSQL> \STARTUP MOUNT
+    gSQL> STARTUP MOUNT
     gSQL> ALTER DATABASE BEGIN INCOMPLETE RECOVERY;
     gSQL> ALTER DATABASE RECOVER AUTOMATICALLY;
     gSQL> ALTER DATABASE END INCOMPLETE RECOVERY;
@@ -596,12 +617,12 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
+    -- ---------- ---------------
+     1 2018-02-10 HOT BACKUP TEST
+     2 2018-02-10 HOT BACKUP TEST
 
 </h6>
 
@@ -612,19 +633,25 @@
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
 
-    gSQL> SHUTDOWN IMMEDIATE
+    gSQL> ALTER DATABASE BEGIN BACKUP;
+
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -632,9 +659,6 @@
 
 <h6>
 
-    gSQL> STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -643,9 +667,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -708,35 +732,41 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
+    -- ---------- ---------------
+     1 2018-02-10 HOT BACKUP TEST
+     2 2018-02-10 HOT BACKUP TEST
 
 </h6>
 
 
-#### Secnario 3 - 7. 모든 파일을 유실한 경우
+#### Secnario 3 - 7. 모든 파일이 유실되는 경우
 
 ###### [Step 1]. 백업전 데이터 적재
 
 <h6>
 
-    gSQL> CREATE TABLE COLD_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
-    gSQL> INSERT INTO COLD_TEST VALUES (1, sysdate, 'COLD BACKUP TEST');
+    gSQL> CREATE TABLE HOT_TEST ( C1 INT, C2 DATE, C3 VARCHAR(50) );
+    gSQL> INSERT INTO HOT_TEST VALUES (1, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
 
 </h6>
 
-###### [Step 2]. 오프라인 백업 수행
+###### [Step 2]. 온라인 백업 수행
 
 <h6>
 
-    gSQL> SHUTDOWN IMMEDIATE
+    gSQL> ALTER DATABASE BEGIN BACKUP;
+
     $ cp db/*  backup/
     $ cp wal/* backup/
+
+    gSQL> INSERT INTO HOT_TEST VALUES (2, sysdate, 'HOT BACKUP TEST');
+    gSQL> COMMIT;
+
+    gSQL> ALTER DATABASE END BACKUP;
 
 </h6>
 
@@ -744,9 +774,6 @@
 
 <h6>
 
-    gSQL> STARTUP
-    gSQL> INSERT INTO COLD_TEST VALUES (2, sysdate, 'COLD BACKUP TEST');
-    gSQL> COMMIT;
     gSQL> ALTER SYSTEM SWITCH LOGFILE; (x6)
 
 </h6>
@@ -755,9 +782,9 @@
 
 <h6>
 
-    gSQL> INSERT INTO COLD_TEST VALUES (3, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (3, sysdate, 'HOT BACKUP TEST');
     gSQL> COMMIT;
-    gSQL> INSERT INTO COLD_TEST VALUES (4, sysdate, 'COLD BACKUP TEST');
+    gSQL> INSERT INTO HOT_TEST VALUES (4, sysdate, 'HOT BACKUP TEST');
 
 </h6>
 
@@ -824,11 +851,10 @@
 
 <h6>
 
-    gSQL> SELECT * FROM COLD_TEST;
+    gSQL> SELECT * FROM HOT_TEST;
 
     C1 C2         C3
-    -- ---------- ----------------
-     1 2018-02-10 COLD BACKUP TEST
-     2 2018-02-10 COLD BACKUP TEST
-
+    -- ---------- ---------------
+     1 2018-02-10 HOT BACKUP TEST
+     2 2018-02-10 HOT BACKUP TEST
 </h6>
