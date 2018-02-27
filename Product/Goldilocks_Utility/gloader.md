@@ -33,17 +33,17 @@
 * 공백문자에 대한 Trim 여부
 
 
-###### 각 구문별 DEFAULT 값은 다음과 같다.
+###### 각 정보별 구문과 DEFAULT 값은 다음과 같다.
 
-| 구문 | 기본값 |
-| :--  | :--    |
-| TABLE | |
-| FIELDS TERMINATED BY | , |
-| OPTIONARLLY ENCLOSED BY | NULL |
-| LINES TERMINATED BY | \n |
-| CHARACTERSET | UTF8 |
-| RTRIM | OFF |
-| LTRIM | OFF |
+| 정보 | 구문 | 기본값 |
+| :--  | :--  | :--    |
+| SCHEMA.TABLE 이름 | TABLE | |
+| COLUMN 간의 구분자 | FIELDS TERMINATED BY | , |
+| COLUMN 데이터의 시작과 끝을 알리는 문자 | OPTIONARLLY ENCLOSED BY | NULL |
+| ROW 간의 구분자 | LINES TERMINATED BY | \n |
+| CHARACTER SET | CHARACTERSET | UTF8 |
+| 공백문자에 대한 Trim 여부 | RTRIM | OFF |
+| | LTRIM | OFF |
 
 #### 2 - 2. Data File
 
