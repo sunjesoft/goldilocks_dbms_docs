@@ -21,19 +21,31 @@
 ###### gloader 가 동작하는데 필요한 옵션을 지닌 파일이다.
 
 ###### [ 필수 정보 ]
+
+<h6>
+
 * SCHEMA.TABLE 이름
+
+</h6>
 
 
 
 ###### [ 선택 정보 ]
+
+<h6>
+
 * COLUMN 간의 구분자
 * COLUMN 데이터의 시작과 끝을 알리는 문자
 * ROW 간의 구분자
 * CHARACTER SET
 * 공백문자에 대한 Trim 여부
 
+</h6>
+
 
 ###### 각 정보별 구문과 DEFAULT 값은 다음과 같다.
+
+<h6>
 
 | 정보 | 구문 | 기본값 |
 | :--  | :--  | :--    |
@@ -44,6 +56,8 @@
 | CHARACTER SET | CHARACTERSET | UTF8 |
 | 공백문자에 대한 Trim 여부 | RTRIM | OFF |
 | | LTRIM | OFF |
+
+</h6>
 
 #### 2 - 2. Data File
 
@@ -61,18 +75,27 @@
 
 ###### gloader 가 동작중 발생되는 에러와 결과를 기록한다.
 
+<h6>
+
 * Data File 의 에러가 발생된 줄과 원인
 * gloader 운영에 대한 결과
+
+</h6>
 
 #### 2 - 4. Bad File
 
 ###### 데이터 업로드 중 에러가 발생한 데이터를 기록한다.
 
 ###### 다음과 같은 경우 업로드가 실패할 수 있다.
+
+<h6>
+
 * 중복 제약
 * 타입 포멧
 * 용량 부족
 * Control File 과 문법 불일치
+
+</h6>
 
 ## 3. gloader 옵션
 
@@ -130,6 +153,8 @@
         -h, --help                              print help message
 
 
+<h6>
+
 | 대분류 | 중분류 | 설명 |
 | :--    | :--    | :--  |
 | mode   | -e     | 데이터 추출 모드 |
@@ -143,6 +168,8 @@
 |         | -d DSN  | DSN 명을 입력 (기본값은 GOLDILOCKS)|
 |         | -c COMMIT | 적재 시 COMMIT 주기 |
 |         | -p NUMBER | 수행 시 병렬작업 수 |
+
+</h6>
 
 
 ## 4. gloader 사용예제
