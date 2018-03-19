@@ -54,8 +54,6 @@
 
 ###### [LINUX]
 
-###### 커널이 3.0.0 이상인 경우 RemoveIPC 값을 no 로 변경한다.
-
 <h6>
 
     # vi /etc/sysctl.conf
@@ -69,11 +67,15 @@
 
 </h6>
 
+###### 커널이 3.0.0 이상인 경우 systemd 의 logind.conf 에서 RemoveIPC 값을 no 로 변경한다.
+
 <h6>
 
     # vi /etc/systemd/logind.conf
     ...
     RemoveIPC=no
+
+    # systemctl restart systemd-logind
 
 </h6>
 
