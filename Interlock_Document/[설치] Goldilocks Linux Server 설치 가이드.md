@@ -74,7 +74,9 @@
     # vi /etc/systemd/logind.conf
     ...
     RemoveIPC=no
-
+    
+    # systemctl restart systemd-logind
+    
 </h6>
 
 
