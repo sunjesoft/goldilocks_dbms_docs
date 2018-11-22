@@ -75,6 +75,8 @@
     ...
     RemoveIPC=no
 
+    # systemctl restart systemd-logind.service
+    
 </h6>
 
 
