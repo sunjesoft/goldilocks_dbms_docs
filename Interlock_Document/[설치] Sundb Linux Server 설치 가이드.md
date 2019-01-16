@@ -70,7 +70,7 @@
 ###### 커널이 3.0.0 이상인 경우 systemd 의 logind.conf 에서 RemoveIPC 값을 no 로 변경한다.
 
 <h6>
-
+    # cp -i /etc/systemd/logind.conf /etc/systemd/logind.conf_prev
     # vi /etc/systemd/logind.conf
     ...
     RemoveIPC=no
