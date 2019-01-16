@@ -71,9 +71,12 @@
 
 <h6>
 
+    # cp -i /etc/systemd/logind.conf /etc/systemd/logind.conf_prev
     # vi /etc/systemd/logind.conf
     ...
     RemoveIPC=no
+    
+    # systemctl restart systemd-logind
 
 </h6>
 
