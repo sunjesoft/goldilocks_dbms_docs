@@ -260,6 +260,8 @@
 
 ###### 생성 전 $GOLDILOCKS_DATA/conf/goldilocks.properties.conf 파일에서 환경에 맞게 프로퍼티를 변경한다.
 
+
+
 ###### [STAND ALONE 모드]
 
 <h6>
@@ -268,11 +270,29 @@
 
 </h6>
 
+###### [CLUSTER 환경 예시]
+
+<h6>
+    -- goldilocks_properties.conf
+    
+    # local cluster member name
+    LOCAL_CLUSTER_MEMBER = 'G1N1'
+
+    # listen port of local cluster member
+    LOCAL_CLUSTER_MEMBER_PORT = 10101
+
+    # host name of local cluster member
+    LOCAL_CLUSTER_MEMBER_HOST = '192.168.0.120'
+   
+</h6>
+
 ###### [CLUSTER 모드]
 
 <h6>
 
     $ gcreatedb --cluster
+    or
+    $ gcreatedb --cluster --member=G1N1 --host='192.168.0.120' --port=10101
 
 </h6>
 
