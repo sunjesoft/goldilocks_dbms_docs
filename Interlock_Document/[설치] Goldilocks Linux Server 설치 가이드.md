@@ -272,6 +272,8 @@
 
 ###### [CLUSTER 환경 예시]
 
+클러스터 환경 구성시 문제 분석 등을 위해 반드시 각 멤버마다 instance name을 다르게 설정해야 한다.
+
 <h6>
     -- goldilocks_properties.conf
     
@@ -283,7 +285,10 @@
 
     # host name of local cluster member
     LOCAL_CLUSTER_MEMBER_HOST = '192.168.0.120'
-   
+    
+    # database instance name
+    # DATABASE_INSTANCE_NAME = 'GOLDILOCKS'
+
 </h6>
 
 ###### [CLUSTER 모드]
