@@ -180,9 +180,9 @@
 </h6>
 
 ###### 0.0.0.0:8080 web server가 구동이된 모습이다.
-![jboss_home](https://github.com/exgoya/home/blob/master/images/jboss_home.jpg)
+![jboss_home](https://github.com/sunjesoft/goldilocks_dbms_docs/tree/master/Image/jboss_home.jpg)
 ###### 0.0.0.0:9990 Adminstration Console (add-user.sh 에서 설정한 id/pwd 를 입력하면 접속할 수 있다.
-![jboss_admin](https://github.com/exgoya/home/blob/master/images/jboss_admin.jpg)
+![jboss_admin](https://github.com/sunjesoft/goldilocks_dbms_docs/tree/master/Image/jboss_admin.jpg)
 
 #### 5 - 3. shutdown
 
@@ -269,7 +269,7 @@
 </h6>
 
 #### 6 - 5. datasources 확인
-![datasource](https://github.com/exgoya/home/blob/master/images/datasource.jpg)
+![datasource](https://github.com/sunjesoft/goldilocks_dbms_docs/tree/master/Image/datasource.jpg)
 
 ## APP TEST
 
@@ -328,7 +328,7 @@
 ## 배포
 ###### manage deployments > add content > war file upload > enable click > check
 
-![add_project](https://github.com/exgoya/home/blob/master/images/add_project.jpg)
+![add_project](https://github.com/sunjesoft/goldilocks_dbms_docs/tree/master/Image/add_project.jpg)
 
 ## Check
 <h6>
@@ -372,7 +372,7 @@
 </h6>
 
 ###### http://localhost:9990
-![xa_datasource](https://github.com/exgoya/home/blob/master/images/xa_datasource.jpg)
+![xa_datasource](https://github.com/sunjesoft/goldilocks_dbms_docs/tree/master/Image/xa_datasource.jpg)
 
 ## Wildfly 연동시 주의사항
 ###### 이전의 jboss가 wildfly로 이름이 바뀌어 업데이트가 되고있다.
