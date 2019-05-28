@@ -56,14 +56,14 @@
 #### 2 - 2. 사용자 계정 비밀번호를 변경한다.
 <h6>
 
-    $ passwd sunje
+    $ passwd jboss
     
 </h6>
 
 #### 2 - 3. 사용자 계정 비밀번호를 변경한다.
 <h6>
 
-    $ su - sunje
+    $ su - jboss
     
 </h6>
  
@@ -181,7 +181,7 @@
 
 ###### 0.0.0.0:8080 web server가 구동이된 모습이다.
 ![jboss_home](https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Image/jboss_home.jpg)
-###### 0.0.0.0:9990 Adminstration Console (add-user.sh 에서 설정한 id/pwd 를 입력하면 접속할 수 있다.
+###### 0.0.0.0:9990 Adminstration Console (add-user.sh 에서 설정한 id/pwd 를 입력하면 접속할 수 있다.)
 ![jboss_admin](https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Image/jboss_admin.jpg)
 
 #### 5 - 3. shutdown
