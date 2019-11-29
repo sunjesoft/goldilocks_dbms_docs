@@ -60,7 +60,7 @@
     
 </h6>
 
-#### 2 - 3. 사용자 계정 비밀번호를 변경한다.
+#### 2 - 3. 사용자으로 접속한다. 
 <h6>
 
     $ su - jboss
@@ -184,7 +184,7 @@
 ###### 0.0.0.0:9990 Adminstration Console (add-user.sh 에서 설정한 id/pwd 를 입력하면 접속할 수 있다.)
 ![jboss_admin](https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Image/jboss_admin.jpg)
 
-#### 5 - 3. shutdown
+#### 5 - 3. jboss aws 
 
 ###### jboss server가 정상적으로 내려가지 않았을 때 아래와 같은 방법으로 shutdown 할 수 있다.
 ###### shutdown
@@ -371,7 +371,7 @@
     
 </h6>
 
-###### http://localhost:9990
+###### http://localhost:9990 으로 접속했을 때의 화면이다. 
 ![xa_datasource](https://github.com/sunjesoft/goldilocks_dbms_docs/blob/master/Image/xa_datasource.jpg)
 
 ## Wildfly 연동시 주의사항
