@@ -1,21 +1,10 @@
 
 # Goldilocks on Docker 
 
-## Docker 란  
-
-Goldilocks Cluster 를 실제 서버에 설치하는 것은 재앙이다. 특히 노드가 많아지면 많아질수록 더 많은 삽질과 설정이 필요하고 뭔가 하나 잘못했을때 문제를 PBT 하는 것도 힘들다. 일단 우리 본부 입장에서는 재현케이스를 확보해야하는데 여러 개 서버를 들락날락하면서 재현케이스를 확보하는 것은 거의 엄청난 운빨이 없이는 불가능하기도 하고 똑같은 명령어를 치다보면 뭐 자괴감도 느끼고 뭐 그런다. 
-
-리소스 측면에서도 문제인데, 지원실 업무 특성상 성능이 꼭 필요하여 실제 장비에 Deploy 해야하는 경우보다 실제 동작 테스트나 비정상종료로 인한 사망을 다루는 것이 훨씬 많은데 실제 VirtualBox 등으로 Resource 를 미리 할당하고 쓴다던가, 테스트를 위해서 여러개 Physical 서버에 설치한다던가 그러다가 또 누군가가 성능 테스트한다고 다 죽여버리면 다시 재구성해야한다던가 하튼 뭐 괴롭다. 
-
-여튼 각설하고, Docker로 어느정도 이런 것을 해결 할 수 있다. 
-
-## Docker 설치 
-
-일단 Docker를 설치하는 것은 인터넷에 많다. 설치는 알아서 하도록 하자. docker-compose 도 같이 설치하는게 좋다. 상당한 노가다를 줄여준다. 
-
 ## 설정하기 
 
-tech9 (192.168.0.119) 장비는 꽤 크기 떄문에 docker 를 써서 뭔가를 하기에 최적의 환경이다. 이 장비에서  Docker 를 사용하는 법을 기술한다. 물론 이 장비에는 Docker 와 docker-compose 가 이미 깔려 있다. 
+tech9 (192.168.0.119) 장비는 꽤 크기 떄문에 docker 를 써서 뭔가를 하기에 최적의 환경이다. 이 장비에서  Docker 를 사용하는 법을 기술한다. 
+물론 이 장비에는 Docker 와 docker-compose 가 이미 깔려 있다. 
 
 원래 docker 라는 것이 root 에서 수행되도록 원래 디자인 되었기 때문에 사실 모든 명령은 root 에서 수행하는 것이 맞다고 하는데 이렇게는 쓰기 어렵기 때문에 자신의 계정에서 다음과 같이 명령을 쳐 본다. 
 
@@ -24,16 +13,18 @@ $ docker ps
 Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.35/containers/json: dial unix /var/run/docker.sock: connect: permission denied
 ```
 
-만약 위와 같이 에러가 나온다면 내가 사용하는 계정이 docker 그룹에 포함되어있지 않기 때문에 이를 추가 시켜줘야한다. 다음과 같은 명령을 통해서 내 계정을 docker group 에 포함 할 수 있다. root 에서 수행한다. 
+만약 위와 같이 에러가 나온다면 내가 사용하는 계정이 docker 그룹에 포함되어있지 않기 때문에 이를 추가 시켜줘야한다. 다음과 같은 명령을 통해서 
+내 계정을 docker group 에 포함 할 수 있다. root 에서 수행한다. 
 
 ```
 # usermod -aG docker my_id
 ```
-my_id 계정 대신 자기 아이디 치면 될꺼고, 당근 세션을 다시 시작해줘야 설정이 먹는다. 
+my_id 계정 대신 자기 아이디 치면 될고, 세션을 다시 시작해줘야 설정이 먹는다. 
 
 ## 시작하기
 
-Docker 의 강력함은 Dockerfile 과 docker-compose.yml 파일을 통한 자동화에 있다. Dockerfile 은 Container 에 수행하는 일련의 작업을 정의한 파일이다. 이걸 실습하기 위해서 일단 빈디렉토리를 아무거나 만들어보자. 
+Docker 의 강력함은 Dockerfile 과 docker-compose.yml 파일을 통한 자동화에 있다. Dockerfile 은 Container 에 수행하는 일련의 
+작업을 정의한 파일이다. 이걸 실습하기 위해서 일단 빈디렉토리를 아무거나 만들어보자. 
 
 ```
 $ mkdir docker_example 
@@ -179,9 +170,11 @@ networks:
 
 ```
 
-하단의 network 섹션에서 이 Cluster 셋에서 사용할 network 설정을 지정한다. cluster_network 은 cluster 내부에서 사용하는 cluster 망이고 service_network 은 service 단에서 사용할 망이다. 이렇게 cluster_network 설정을 분리해두면 Split brain 등의 테스트가 용이하기 때문에 일부러 분리하였다. 
+하단의 network 섹션에서 이 Cluster 셋에서 사용할 network 설정을 지정한다. cluster_network 은 cluster 내부에서 사용하는 cluster 망이고 service_network 은 service 단에서 사용할 망이다. 이렇게 cluster_network 설정을 분리해두면 Split brain 등의 테스트가 용이하기 때문에 
+일부러 분리하였다. 
 
-service 섹션은 각각의 docker container 가 기동되는 각각의 설정이고, 환경변수를 통해서 CLUSTER 네트웍 및 기타 설정들을 주입해준 것이라 보면 된다. 이 환경변수를 통해서 shell 에서 받아 DB 를 생성하고 startup 한다. 
+service 섹션은 각각의 docker container 가 기동되는 각각의 설정이고, 환경변수를 통해서 CLUSTER 네트웍 및 기타 설정들을 주입해준 것이라 
+보면 된다. 이 환경변수를 통해서 shell 에서 받아 DB 를 생성하고 startup 한다. 
 
 
 compose-file 까지 수행되었다면 아마 디렉토리 구성은 다음과 같을 것이다. 
@@ -211,7 +204,7 @@ $ docker-compose up
 * docker-compose.yaml 파일에 지정한 Local PORT 를 통해 접속한다.  위 설정대로라면 host 에서 localhost:57562 는 g1n1 의 listening port, localhost:57563 은 g1n2 의 listening port 가 된다. 
 * docker container 로 attach 한다. 
 
-첫번째 방법이야 잘 알꺼라보고 두번째 방법을 설명하자면 다음과 같다. 일단 다음 명령을 통해 현재 running 되어 있는 container 리스트를 조회한다. 
+두번째 방법을 설명하자면 다음과 같다. 일단 다음 명령을 통해 현재 running 되어 있는 container 리스트를 조회한다. 
 
 ```
 $ docker ps 
